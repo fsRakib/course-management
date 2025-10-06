@@ -61,7 +61,10 @@ export default function StudentDashboard() {
             Welcome back, {session?.user?.name}!
           </h1>
           <p className="text-lg text-gray-600">
-            Role: <span className="font-semibold capitalize">{session?.user?.role}</span>
+            Role:{" "}
+            <span className="font-semibold capitalize">
+              {session?.user?.role}
+            </span>
           </p>
           <p className="text-gray-600 mt-2">
             Continue your learning journey with the courses below.
@@ -72,15 +75,19 @@ export default function StudentDashboard() {
           {/* Course List */}
           <div className="lg:col-span-2">
             <div className="bg-white rounded-lg shadow-sm p-6">
-              <h2 className="text-2xl font-bold text-gray-900 mb-6">My Courses</h2>
-              
+              <h2 className="text-2xl font-bold text-gray-900 mb-6">
+                My Courses
+              </h2>
+
               {loading ? (
                 <div className="text-center py-8">
                   <div className="text-gray-500">Loading courses...</div>
                 </div>
               ) : courses.length === 0 ? (
                 <div className="text-center py-8">
-                  <div className="text-gray-500 mb-4">No courses available yet.</div>
+                  <div className="text-gray-500 mb-4">
+                    No courses available yet.
+                  </div>
                   <p className="text-sm text-gray-400">
                     Check back later for new courses or contact your instructor.
                   </p>
@@ -112,9 +119,15 @@ export default function StudentDashboard() {
                         </span>
                         <Button
                           size="sm"
-                          variant={selectedCourse?._id === course._id ? "default" : "outline"}
+                          variant={
+                            selectedCourse?._id === course._id
+                              ? "default"
+                              : "outline"
+                          }
                         >
-                          {selectedCourse?._id === course._id ? "Selected" : "View Course"}
+                          {selectedCourse?._id === course._id
+                            ? "Selected"
+                            : "View Course"}
                         </Button>
                       </div>
                     </div>
@@ -127,16 +140,22 @@ export default function StudentDashboard() {
           {/* Course Content */}
           <div className="lg:col-span-1">
             <div className="bg-white rounded-lg shadow-sm p-6">
-              <h2 className="text-xl font-bold text-gray-900 mb-4">Course Content</h2>
-              
+              <h2 className="text-xl font-bold text-gray-900 mb-4">
+                Course Content
+              </h2>
+
               {!selectedCourse ? (
                 <div className="text-center py-8">
-                  <div className="text-gray-500">Select a course to view content</div>
+                  <div className="text-gray-500">
+                    Select a course to view content
+                  </div>
                 </div>
               ) : (
                 <div className="space-y-4">
-                  <h3 className="font-semibold text-gray-900">{selectedCourse.title}</h3>
-                  
+                  <h3 className="font-semibold text-gray-900">
+                    {selectedCourse.title}
+                  </h3>
+
                   {/* Modules */}
                   <div className="space-y-3">
                     {selectedCourse.modules.map((module, index) => (
@@ -147,20 +166,29 @@ export default function StudentDashboard() {
                               ? "bg-indigo-50 text-indigo-700"
                               : "text-gray-700 hover:bg-gray-50"
                           }`}
-                          onClick={() => setSelectedModule(selectedModule === index ? null : index)}
+                          onClick={() =>
+                            setSelectedModule(
+                              selectedModule === index ? null : index
+                            )
+                          }
                         >
                           Module {index + 1}: {module.title}
                         </button>
-                        
+
                         {selectedModule === index && (
                           <div className="p-3 border-t bg-gray-50">
                             {/* Topics */}
                             {module.topics.length > 0 && (
                               <div className="mb-3">
-                                <p className="font-medium text-sm text-gray-600 mb-2">Topics:</p>
+                                <p className="font-medium text-sm text-gray-600 mb-2">
+                                  Topics:
+                                </p>
                                 <ul className="text-sm text-gray-700 space-y-1">
                                   {module.topics.map((topic, topicIndex) => (
-                                    <li key={topicIndex} className="flex items-start">
+                                    <li
+                                      key={topicIndex}
+                                      className="flex items-start"
+                                    >
                                       <span className="w-2 h-2 bg-gray-400 rounded-full mt-2 mr-2 flex-shrink-0"></span>
                                       {topic}
                                     </li>
@@ -168,40 +196,60 @@ export default function StudentDashboard() {
                                 </ul>
                               </div>
                             )}
-                            
+
                             {/* Class Videos */}
                             {module.classVideos.length > 0 && (
                               <div className="mb-3">
-                                <p className="font-medium text-sm text-gray-600 mb-2">Class Videos:</p>
+                                <p className="font-medium text-sm text-gray-600 mb-2">
+                                  Class Videos:
+                                </p>
                                 <div className="space-y-2">
-                                  {module.classVideos.map((video, videoIndex) => (
-                                    <div key={videoIndex} className="flex items-center justify-between">
-                                      <span className="text-sm text-gray-700 truncate">
-                                        Video {videoIndex + 1}
-                                      </span>
-                                      <Button size="sm" variant="outline">
-                                        <a href={video} target="_blank" rel="noopener noreferrer">
-                                          Watch
-                                        </a>
-                                      </Button>
-                                    </div>
-                                  ))}
+                                  {module.classVideos.map(
+                                    (video, videoIndex) => (
+                                      <div
+                                        key={videoIndex}
+                                        className="flex items-center justify-between"
+                                      >
+                                        <span className="text-sm text-gray-700 truncate">
+                                          Video {videoIndex + 1}
+                                        </span>
+                                        <Button size="sm" variant="outline">
+                                          <a
+                                            href={video}
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                          >
+                                            Watch
+                                          </a>
+                                        </Button>
+                                      </div>
+                                    )
+                                  )}
                                 </div>
                               </div>
                             )}
-                            
+
                             {/* Files */}
                             {module.files.length > 0 && (
                               <div>
-                                <p className="font-medium text-sm text-gray-600 mb-2">Files:</p>
+                                <p className="font-medium text-sm text-gray-600 mb-2">
+                                  Files:
+                                </p>
                                 <div className="space-y-2">
                                   {module.files.map((file, fileIndex) => (
-                                    <div key={fileIndex} className="flex items-center justify-between">
+                                    <div
+                                      key={fileIndex}
+                                      className="flex items-center justify-between"
+                                    >
                                       <span className="text-sm text-gray-700 truncate">
                                         File {fileIndex + 1}
                                       </span>
                                       <Button size="sm" variant="outline">
-                                        <a href={file} target="_blank" rel="noopener noreferrer">
+                                        <a
+                                          href={file}
+                                          target="_blank"
+                                          rel="noopener noreferrer"
+                                        >
                                           Download
                                         </a>
                                       </Button>

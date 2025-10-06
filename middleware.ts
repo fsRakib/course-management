@@ -33,7 +33,8 @@ export async function middleware(request: NextRequest) {
     }
 
     // Check if user has required role for this route
-    const requiredRoles = roleBasedRoutes[protectedRoute as keyof typeof roleBasedRoutes];
+    const requiredRoles =
+      roleBasedRoutes[protectedRoute as keyof typeof roleBasedRoutes];
     const userRole = token.role as string;
 
     if (!requiredRoles.includes(userRole)) {
