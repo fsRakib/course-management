@@ -8,75 +8,67 @@ export default function ServicesSection() {
   const services = [
     {
       icon: "💻",
-      title: "অনলাইন/অফলাইন প্রোগ্রাম",
-      description: "আপনার সুবিধা অনুযায়ী বেছে নিন",
+      title: "Interactive Learning Platform",
+      description: "Hands-on coding experience with real projects",
       color: "bg-blue-100 group-hover:bg-blue-500",
-      features: ["লাইভ ক্লাস", "রেকর্ডেড ভিডিও", "ইন্টারঅ্যাক্টিভ সেশন"],
+      features: [
+        "Live Coding Sessions",
+        "Project-Based Learning",
+        "Code Reviews",
+      ],
     },
     {
-      icon: "👨‍🏫",
-      title: "মেধাবী ও অভিজ্ঞ শিক্ষক",
-      description: "দেশের সেরা শিক্ষকদের গাইডেন্স",
+      icon: "🤖",
+      title: "AI & Machine Learning",
+      description: "Master the future of technology",
       color: "bg-green-100 group-hover:bg-green-500",
-      features: [
-        "বিশেষজ্ঞ শিক্ষকমণ্ডলী",
-        "পার্সোনালাইজড গাইডেন্স",
-        "মেন্টরিং সাপোর্ট",
-      ],
+      features: ["Neural Networks", "Deep Learning", "Computer Vision"],
     },
     {
-      icon: "📚",
-      title: "মানসম্মত স্টাডি ম্যাটেরিয়ালস",
-      description: "সর্বোচ্চ মানের পাঠ্য উপকরণ",
+      icon: "🌐",
+      title: "Full Stack Development",
+      description: "Complete web development mastery",
       color: "bg-purple-100 group-hover:bg-purple-500",
-      features: ["আপডেটেড কন্টেন্ট", "প্রিন্টেড বুক", "ডিজিটাল রিসোর্স"],
-    },
-    {
-      icon: "🎯",
-      title: "কনসেপ্ট বেইজড ক্লাস",
-      description: "গভীর ধারণার মাধ্যমে শিক্ষা",
-      color: "bg-yellow-100 group-hover:bg-yellow-500",
-      features: [
-        "ধাপে ধাপে শিক্ষা",
-        "প্র্যাক্টিক্যাল উদাহরণ",
-        "রিয়েল লাইফ অ্যাপ্লিকেশন",
-      ],
-    },
-    {
-      icon: "📊",
-      title: "ইউনিক এক্সাম সিস্টেম",
-      description: "আধুনিক পরীক্ষা পদ্ধতি",
-      color: "bg-red-100 group-hover:bg-red-500",
-      features: ["AI বেসড মার্কিং", "ডিটেইলড এনালাইসিস", "র‌্যাঙ্কিং সিস্টেম"],
-    },
-    {
-      icon: "💬",
-      title: "সার্বক্ষণিক Q&A সেবা",
-      description: "২৪/৭ সমস্যা সমাধান",
-      color: "bg-indigo-100 group-hover:bg-indigo-500",
-      features: ["তাৎক্ষণিক রেসপন্স", "এক্সপার্ট সাপোর্ট", "গ্রুপ ডিসকাশন"],
+      features: ["Frontend Frameworks", "Backend APIs", "Database Design"],
     },
     {
       icon: "📱",
-      title: "Auto SMS রেজাল্ট",
-      description: "তাৎক্ষণিক ফলাফল প্রাপ্তি",
+      title: "Mobile App Development",
+      description: "Build apps for iOS and Android",
+      color: "bg-yellow-100 group-hover:bg-yellow-500",
+      features: ["React Native", "Flutter Development", "Native iOS/Android"],
+    },
+    {
+      icon: "�",
+      title: "Python Programming",
+      description: "From basics to advanced applications",
+      color: "bg-red-100 group-hover:bg-red-500",
+      features: ["Syntax Mastery", "Data Structures", "Automation Scripts"],
+    },
+    {
+      icon: "🏆",
+      title: "Competitive Programming",
+      description: "Algorithmic problem solving",
+      color: "bg-indigo-100 group-hover:bg-indigo-500",
+      features: ["Algorithm Design", "Contest Preparation", "Problem Solving"],
+    },
+    {
+      icon: "�",
+      title: "Data Science & Analytics",
+      description: "Extract insights from data",
       color: "bg-teal-100 group-hover:bg-teal-500",
       features: [
-        "রিয়েল টাইম নোটিফিকেশন",
-        "পার্ফরমেন্স ট্র্যাকিং",
-        "প্যারেন্ট আপডেট",
+        "Data Visualization",
+        "Statistical Analysis",
+        "Machine Learning Models",
       ],
     },
     {
-      icon: "📈",
-      title: "এক্সাম এনালাইসিস রিপোর্ট",
-      description: "বিস্তারিত পারফরমেন্স বিশ্লেষণ",
+      icon: "☁️",
+      title: "Cloud Computing",
+      description: "Deploy and scale applications",
       color: "bg-orange-100 group-hover:bg-orange-500",
-      features: [
-        "সাবজেক্ট ওয়াইজ স্কোর",
-        "উইক নেস আইডেন্টিফিকেশন",
-        "ইমপ্রুভমেন্ট প্ল্যান",
-      ],
+      features: ["AWS/Azure/GCP", "DevOps Practices", "Containerization"],
     },
   ];
 
@@ -120,10 +112,11 @@ export default function ServicesSection() {
       <div className="container mx-auto px-4 relative z-10">
         <div className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl font-bold text-gray-800 mb-4">
-            অনন্য সব <span className="gradient-text">সেবা পরিক্রমা</span>
+            Comprehensive <span className="gradient-text">Tech Services</span>
           </h2>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-            দেশব্যাপী সমান মানের শিক্ষা সেবা প্রদানে আমরা প্রতিশ্রুতিবদ্ধ
+            Everything you need to master modern technology and advance your
+            career
           </p>
           <div className="mt-6 w-24 h-1 bg-gradient-to-r from-blue-500 to-purple-500 mx-auto rounded-full"></div>
         </div>
@@ -179,13 +172,11 @@ export default function ServicesSection() {
         {/* Quality Assurance Badge */}
         <div className="mt-16 text-center">
           <div className="inline-flex items-center bg-gradient-to-r from-blue-500 to-purple-600 text-white px-8 py-4 rounded-full shadow-lg hover:shadow-xl transition-all transform hover:scale-105">
-            <span className="text-2xl mr-3">🏆</span>
+            <span className="text-2xl mr-3">🚀</span>
             <div className="text-left">
-              <div className="font-semibold">
-                দেশব্যাপী সমান সেবার নিশ্চয়তা
-              </div>
+              <div className="font-semibold">Industry-Standard Curriculum</div>
               <div className="text-xs opacity-90">
-                সকল শাখায় একই মানের শিক্ষা
+                Learn with cutting-edge technology
               </div>
             </div>
           </div>

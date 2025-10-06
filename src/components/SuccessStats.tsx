@@ -73,35 +73,35 @@ export default function SuccessStats() {
 
   const stats = [
     {
-      icon: "🏥",
-      count: 4805,
+      icon: "💼",
+      count: 2500,
       suffix: "+",
-      title: "মেডিকেল ভর্তিতে সফল",
-      subtitle: "সরকারি মেডিকেল ও ডেন্টাল কলেজে",
+      title: "Career Transitions",
+      subtitle: "From non-tech to high-paying tech jobs",
       color: "bg-red-500",
     },
     {
-      icon: "⚙️",
-      count: 1300,
+      icon: "🚀",
+      count: 150,
       suffix: "+",
-      title: "BUET ভর্তিতে সফল",
-      subtitle: "মেধা তালিকায় প্রথম ৫০ এ ৪৮ জন",
+      title: "Startups Launched",
+      subtitle: "By our entrepreneurial alumni",
       color: "bg-blue-500",
     },
     {
-      icon: "🎓",
-      count: 1800,
-      suffix: "+",
-      title: "ঢাবি 'ক' ইউনিটে সফল",
-      subtitle: "মেধা তালিকায় প্রথম ১০ এ ১০ জন",
+      icon: "💰",
+      count: 95,
+      suffix: "%",
+      title: "Job Placement Rate",
+      subtitle: "Within 6 months of graduation",
       color: "bg-purple-500",
     },
     {
-      icon: "📚",
-      count: 1250,
+      icon: "🏆",
+      count: 50,
       suffix: "+",
-      title: "ঢাবি 'খ' ইউনিটে সফল",
-      subtitle: "প্রথম বছরেই অসাধারণ সাফল্য",
+      title: "Industry Awards",
+      subtitle: "Won by our students & faculty",
       color: "bg-green-500",
     },
   ];
@@ -123,9 +123,11 @@ export default function SuccessStats() {
 
       <div className="container mx-auto px-4 relative z-10">
         <div className="text-center mb-12">
-          <h2 className="text-4xl font-bold mb-4">অবাক করা সাফল্যগাঁথা</h2>
+          <h2 className="text-4xl font-bold mb-4">
+            Incredible Success Metrics
+          </h2>
           <p className="text-xl text-blue-100">
-            আমাদের শিক্ষার্থীদের ঈর্ষণীয় সাফল্যের পরিসংখ্যান
+            Real numbers showcasing our students' achievements in tech
           </p>
         </div>
 
@@ -171,10 +173,10 @@ export default function SuccessStats() {
         {/* Achievement badges */}
         <div className="mt-16 flex flex-wrap justify-center gap-4">
           {[
-            "২০২৪ সালের সেরা",
-            "দেশব্যাপী শাখা",
-            "২৪/৭ সেবা",
-            "বিশেষজ্ঞ শিক্ষক",
+            "Award Winning Platform",
+            "Global Community",
+            "24/7 Support",
+            "Industry Experts",
           ].map((badge, index) => (
             <div
               key={index}

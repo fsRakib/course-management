@@ -9,22 +9,24 @@ export default function HeroBanner() {
 
   const slides = [
     {
-      title: "আপনার সফলতার সঙ্গী",
-      subtitle: "দেশসেরা কোর্স ম্যানেজমেন্ট প্ল্যাটফর্ম",
+      title: "Master Modern Technology",
+      subtitle: "Leading Tech Education Platform",
       description:
-        "বিশেষজ্ঞ শিক্ষকদের গাইডেন্সে আপনার স্বপ্নের লক্ষ্য অর্জন করুন।",
+        "Learn cutting-edge technologies with expert guidance and build your dream career in tech.",
       gradient: "from-blue-600 via-purple-600 to-blue-800",
     },
     {
-      title: "মেডিকেল ভর্তিতে এগিয়ে থাকুন",
-      subtitle: "৪৮০৫+ শিক্ষার্থীর সফলতার গল্প",
-      description: "সরকারি মেডিকেল ও ডেন্টাল কলেজে চান্স পাওয়ার নিশ্চয়তা।",
+      title: "AI & Machine Learning",
+      subtitle: "Build the Future with AI",
+      description:
+        "Master neural networks, deep learning, and create intelligent applications.",
       gradient: "from-green-600 via-teal-600 to-green-800",
     },
     {
-      title: "ইঞ্জিনিয়ারিং এ নিশ্চিত সফলতা",
-      subtitle: "BUET-তে ১৩০০+ শিক্ষার্থীর সাফল্য",
-      description: "মেধা তালিকায় প্রথম ৫০ এ ৪৮ জনসহ রেকর্ড পরিমাণ সফলতা।",
+      title: "Full Stack Development",
+      subtitle: "Code Your Success Story",
+      description:
+        "From frontend to backend, master the complete web development stack.",
       gradient: "from-purple-600 via-indigo-600 to-purple-800",
     },
   ];
@@ -67,7 +69,10 @@ export default function HeroBanner() {
                   slides[currentSlide].title
                     .split(" ")
                     .findIndex(
-                      (w) => w === "সফলতার" || w === "এগিয়ে" || w === "সফলতা"
+                      (w) =>
+                        w === "Technology" ||
+                        w === "Learning" ||
+                        w === "Development"
                     )
                     ? "text-yellow-300"
                     : ""
@@ -99,7 +104,7 @@ export default function HeroBanner() {
               size="lg"
               className="bg-yellow-500 hover:bg-yellow-600 text-black font-semibold px-8 py-3 text-lg transform hover:scale-105 transition-all"
             >
-              <Link href="/student/dashboard">কোর্স দেখুন</Link>
+              <Link href="/student/dashboard">Explore Courses</Link>
             </Button>
             <Button
               asChild
@@ -107,7 +112,7 @@ export default function HeroBanner() {
               size="lg"
               className="border-white text-white hover:bg-white hover:text-blue-600 px-8 py-3 text-lg transform hover:scale-105 transition-all"
             >
-              <Link href="/signup">ফ্রি রেজিস্ট্রেশন</Link>
+              <Link href="/signup">Start Learning Free</Link>
             </Button>
           </div>
 

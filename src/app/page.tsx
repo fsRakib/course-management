@@ -18,123 +18,238 @@ export default function Home() {
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
             <h2 className="text-4xl font-bold text-gray-800 mb-4">
-              সময়োপযোগী প্রোগ্রামসমূহ
+              Master Modern Tech Stacks
             </h2>
             <p className="text-xl text-gray-600">
-              আপনার লক্ষ্য অনুযায়ী বেছে নিন সেরা কোর্স
+              Choose the best course according to your career goals in
+              technology
             </p>
           </div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {/* Medical Admission Program */}
+            {/* Machine Learning & AI */}
             <Card className="group hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 bg-gradient-to-br from-green-50 to-blue-50">
               <div className="p-6">
                 <div className="w-16 h-16 bg-green-500 rounded-2xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
-                  <span className="text-2xl">🏥</span>
+                  <span className="text-2xl">🤖</span>
                 </div>
                 <h3 className="text-2xl font-bold text-gray-800 mb-3">
-                  মেডিকেল এডমিশন প্রোগ্রাম
+                  Machine Learning & AI
                 </h3>
                 <ul className="text-gray-600 space-y-2 mb-6">
                   <li className="flex items-center">
-                    <span className="text-green-500 mr-2">•</span> মেধাবী ও
-                    অভিজ্ঞ শিক্ষক দ্বারা ক্লাস
+                    <span className="text-green-500 mr-2">•</span> Deep Learning
+                    Fundamentals
                   </li>
                   <li className="flex items-center">
-                    <span className="text-green-500 mr-2">•</span> লাইভ ম্যারাথন
-                    ক্লাস
+                    <span className="text-green-500 mr-2">•</span> Neural
+                    Networks & TensorFlow
                   </li>
                   <li className="flex items-center">
-                    <span className="text-green-500 mr-2">•</span> প্রশ্নব্যাংক
-                    মাস্টার ক্লাস ও কুইজ
+                    <span className="text-green-500 mr-2">•</span> Computer
+                    Vision & NLP
                   </li>
                   <li className="flex items-center">
-                    <span className="text-green-500 mr-2">•</span> সার্বক্ষণিক Q
-                    & A সেবা
+                    <span className="text-green-500 mr-2">•</span> Real-world ML
+                    Projects
                   </li>
                 </ul>
                 <div className="flex gap-2">
                   <Button className="flex-1 bg-green-500 hover:bg-green-600">
-                    বিস্তারিত
+                    Learn More
                   </Button>
                   <Button variant="outline" className="flex-1">
-                    ভর্তি হন
+                    Enroll Now
                   </Button>
                 </div>
               </div>
             </Card>
 
-            {/* Engineering Admission Program */}
+            {/* Web Development */}
             <Card className="group hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 bg-gradient-to-br from-blue-50 to-purple-50">
               <div className="p-6">
                 <div className="w-16 h-16 bg-blue-500 rounded-2xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
-                  <span className="text-2xl">⚙️</span>
+                  <span className="text-2xl">🌐</span>
                 </div>
                 <h3 className="text-2xl font-bold text-gray-800 mb-3">
-                  ইঞ্জিনিয়ারিং এডমিশন প্রোগ্রাম
+                  Full Stack Web Development
                 </h3>
                 <ul className="text-gray-600 space-y-2 mb-6">
                   <li className="flex items-center">
-                    <span className="text-blue-500 mr-2">•</span> পর্যাপ্ত
-                    সংখ্যক স্ট্যান্ডার্ড এক্সাম
+                    <span className="text-blue-500 mr-2">•</span> React, Next.js
+                    & TypeScript
                   </li>
                   <li className="flex items-center">
-                    <span className="text-blue-500 mr-2">•</span> মানসম্মত সকল
-                    স্টাডি ম্যাটেরিয়ালস
+                    <span className="text-blue-500 mr-2">•</span> Node.js &
+                    Express Backend
                   </li>
                   <li className="flex items-center">
-                    <span className="text-blue-500 mr-2">•</span> লাইভ ম্যারাথন
-                    ক্লাস
+                    <span className="text-blue-500 mr-2">•</span> Database
+                    Design & MongoDB
                   </li>
                   <li className="flex items-center">
-                    <span className="text-blue-500 mr-2">•</span> ডাউট সলভিং
-                    সেবা
+                    <span className="text-blue-500 mr-2">•</span> Deployment &
+                    DevOps
                   </li>
                 </ul>
                 <div className="flex gap-2">
                   <Button className="flex-1 bg-blue-500 hover:bg-blue-600">
-                    বিস্তারিত
+                    Learn More
                   </Button>
                   <Button variant="outline" className="flex-1">
-                    ভর্তি হন
+                    Enroll Now
                   </Button>
                 </div>
               </div>
             </Card>
 
-            {/* University Admission Program */}
+            {/* Mobile App Development */}
             <Card className="group hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 bg-gradient-to-br from-purple-50 to-pink-50">
               <div className="p-6">
                 <div className="w-16 h-16 bg-purple-500 rounded-2xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
-                  <span className="text-2xl">🎓</span>
+                  <span className="text-2xl">📱</span>
                 </div>
                 <h3 className="text-2xl font-bold text-gray-800 mb-3">
-                  ভার্সিটি এডমিশন প্রোগ্রাম
+                  Android & iOS Development
                 </h3>
                 <ul className="text-gray-600 space-y-2 mb-6">
                   <li className="flex items-center">
-                    <span className="text-purple-500 mr-2">•</span> ঢাকা
-                    বিশ্ববিদ্যালয় 'ক' ও 'খ' ইউনিট
+                    <span className="text-purple-500 mr-2">•</span> Flutter &
+                    React Native
                   </li>
                   <li className="flex items-center">
-                    <span className="text-purple-500 mr-2">•</span> GST
-                    প্রস্তুতি
+                    <span className="text-purple-500 mr-2">•</span> Native
+                    Android (Kotlin)
                   </li>
                   <li className="flex items-center">
-                    <span className="text-purple-500 mr-2">•</span> প্রশ্নব্যাংক
-                    মাস্টার ক্লাস
+                    <span className="text-purple-500 mr-2">•</span> iOS
+                    Development (Swift)
                   </li>
                   <li className="flex items-center">
-                    <span className="text-purple-500 mr-2">•</span> অনলাইন ও
-                    অফলাইন সুবিধা
+                    <span className="text-purple-500 mr-2">•</span> App Store
+                    Deployment
                   </li>
                 </ul>
                 <div className="flex gap-2">
                   <Button className="flex-1 bg-purple-500 hover:bg-purple-600">
-                    বিস্তারিত
+                    Learn More
                   </Button>
                   <Button variant="outline" className="flex-1">
-                    ভর্তি হন
+                    Enroll Now
+                  </Button>
+                </div>
+              </div>
+            </Card>
+
+            {/* Python Programming */}
+            <Card className="group hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 bg-gradient-to-br from-yellow-50 to-orange-50">
+              <div className="p-6">
+                <div className="w-16 h-16 bg-yellow-500 rounded-2xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                  <span className="text-2xl">🐍</span>
+                </div>
+                <h3 className="text-2xl font-bold text-gray-800 mb-3">
+                  Python Programming
+                </h3>
+                <ul className="text-gray-600 space-y-2 mb-6">
+                  <li className="flex items-center">
+                    <span className="text-yellow-500 mr-2">•</span> Python
+                    Fundamentals to Advanced
+                  </li>
+                  <li className="flex items-center">
+                    <span className="text-yellow-500 mr-2">•</span> Data Science
+                    & Analytics
+                  </li>
+                  <li className="flex items-center">
+                    <span className="text-yellow-500 mr-2">•</span> Django &
+                    Flask Web Frameworks
+                  </li>
+                  <li className="flex items-center">
+                    <span className="text-yellow-500 mr-2">•</span> Automation &
+                    Scripting
+                  </li>
+                </ul>
+                <div className="flex gap-2">
+                  <Button className="flex-1 bg-yellow-500 hover:bg-yellow-600">
+                    Learn More
+                  </Button>
+                  <Button variant="outline" className="flex-1">
+                    Enroll Now
+                  </Button>
+                </div>
+              </div>
+            </Card>
+
+            {/* Competitive Programming */}
+            <Card className="group hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 bg-gradient-to-br from-red-50 to-pink-50">
+              <div className="p-6">
+                <div className="w-16 h-16 bg-red-500 rounded-2xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                  <span className="text-2xl">�</span>
+                </div>
+                <h3 className="text-2xl font-bold text-gray-800 mb-3">
+                  Competitive Programming
+                </h3>
+                <ul className="text-gray-600 space-y-2 mb-6">
+                  <li className="flex items-center">
+                    <span className="text-red-500 mr-2">•</span> Data Structures
+                    & Algorithms
+                  </li>
+                  <li className="flex items-center">
+                    <span className="text-red-500 mr-2">•</span> Problem Solving
+                    Techniques
+                  </li>
+                  <li className="flex items-center">
+                    <span className="text-red-500 mr-2">•</span> Codeforces &
+                    LeetCode Practice
+                  </li>
+                  <li className="flex items-center">
+                    <span className="text-red-500 mr-2">•</span> Contest
+                    Preparation
+                  </li>
+                </ul>
+                <div className="flex gap-2">
+                  <Button className="flex-1 bg-red-500 hover:bg-red-600">
+                    Learn More
+                  </Button>
+                  <Button variant="outline" className="flex-1">
+                    Enroll Now
+                  </Button>
+                </div>
+              </div>
+            </Card>
+
+            {/* Data Science & Analytics */}
+            <Card className="group hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 bg-gradient-to-br from-indigo-50 to-blue-50">
+              <div className="p-6">
+                <div className="w-16 h-16 bg-indigo-500 rounded-2xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                  <span className="text-2xl">📊</span>
+                </div>
+                <h3 className="text-2xl font-bold text-gray-800 mb-3">
+                  Data Science & Analytics
+                </h3>
+                <ul className="text-gray-600 space-y-2 mb-6">
+                  <li className="flex items-center">
+                    <span className="text-indigo-500 mr-2">•</span> Statistics &
+                    Mathematics
+                  </li>
+                  <li className="flex items-center">
+                    <span className="text-indigo-500 mr-2">•</span> Pandas,
+                    NumPy & Matplotlib
+                  </li>
+                  <li className="flex items-center">
+                    <span className="text-indigo-500 mr-2">•</span> Machine
+                    Learning Models
+                  </li>
+                  <li className="flex items-center">
+                    <span className="text-indigo-500 mr-2">•</span> Business
+                    Intelligence Tools
+                  </li>
+                </ul>
+                <div className="flex gap-2">
+                  <Button className="flex-1 bg-indigo-500 hover:bg-indigo-600">
+                    Learn More
+                  </Button>
+                  <Button variant="outline" className="flex-1">
+                    Enroll Now
                   </Button>
                 </div>
               </div>
@@ -156,29 +271,30 @@ export default function Home() {
       <WhyChooseUsSection />
 
       {/* CTA Section */}
-      <section className="py-16 bg-gradient-to-r from-green-600 to-blue-600 text-white">
+      <section className="py-16 bg-gradient-to-r from-purple-600 to-blue-600 text-white">
         <div className="container mx-auto px-4 text-center">
           <h2 className="text-4xl font-bold mb-4">
-            আজই শুরু করুন আপনার সফলতার যাত্রা
+            Start Your Tech Journey Today
           </h2>
-          <p className="text-xl mb-8 text-green-100">
-            হাজারো শিক্ষার্থীর সাথে যুক্ত হয়ে আপনার স্বপ্নের ক্যারিয়ার গড়ুন
+          <p className="text-xl mb-8 text-purple-100">
+            Join thousands of students mastering cutting-edge technologies and
+            building their dream careers
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Button
               asChild
               size="lg"
-              className="bg-white text-green-600 hover:bg-gray-100 px-8 py-3 text-lg font-semibold"
+              className="bg-white text-purple-600 hover:bg-gray-100 px-8 py-3 text-lg font-semibold"
             >
-              <Link href="/signup">ফ্রি রেজিস্ট্রেশন করুন</Link>
+              <Link href="/signup">Get Started Free</Link>
             </Button>
             <Button
               asChild
               variant="outline"
               size="lg"
-              className="border-white text-white hover:bg-white hover:text-green-600 px-8 py-3 text-lg"
+              className="border-white text-white hover:bg-white hover:text-purple-600 px-8 py-3 text-lg"
             >
-              <Link href="/student/dashboard">কোর্স সমূহ দেখুন</Link>
+              <Link href="/student/dashboard">Explore Courses</Link>
             </Button>
           </div>
         </div>

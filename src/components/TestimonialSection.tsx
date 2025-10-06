@@ -9,30 +9,30 @@ export default function TestimonialSection() {
 
   const testimonials = [
     {
-      name: "তোফায়েল আহমেদ",
-      achievement: "BUET মেধাতালিকায় ১ম",
-      year: "২০২ৄ-২৫",
+      name: "Sarah Chen",
+      achievement: "Software Engineer at Google",
+      year: "2023 Graduate",
       quote:
-        "আমি উদ্ভাসের এডমিশন প্রোগ্রামের সাথে সিলেবাস অনেকটা এগিয়ে রেখেছিলাম। নিয়মিত ক্লাস ও পরীক্ষায় অংশগ্রহণ করেছি, কোনো ক্লাস বা পরীক্ষা কখনো মিস দিইনি। ম্যারাথন ক্লাসগুলো আমার প্রত্যাশার চেয়েও অনেক বেশি কার্যকর ছিল।",
-      position: "১ম",
+        "The Machine Learning course transformed my career completely. The hands-on projects and expert mentorship helped me land my dream job at Google. The curriculum was exactly what the industry needed.",
+      position: "SDE",
       color: "from-blue-500 to-purple-600",
     },
     {
-      name: "সজীব আহমেদ রুহিত",
-      achievement: "BUET মেধাতালিকায় ২য়",
-      year: "২০২৪-২৫",
+      name: "Ahmed Rahman",
+      achievement: "Full Stack Developer at Microsoft",
+      year: "2024 Graduate",
       quote:
-        "আমি এডমিশন জার্নির শুরু থেকেই উদ্ভাসের সাথে ছিলাম। অনলাইনে ম্যারাথন ক্লাসগুলো করতাম আর অফলাইনে বেশি বেশি এক্সাম দিতাম। গুণগত মানের দিক থেকে উদ্ভাসের ক্লাসগুলো অনেক ভালো ছিল।",
-      position: "২য়",
+        "From zero programming knowledge to landing a job at Microsoft in just 8 months! The Full Stack Development course covered everything from frontend to backend with real-world projects.",
+      position: "SDE",
       color: "from-green-500 to-teal-600",
     },
     {
-      name: "এস.এ.এম তামিম",
-      achievement: "BUET মেধাতালিকায় ৩য়",
-      year: "২০২৪-২৫",
+      name: "Maria Rodriguez",
+      achievement: "Mobile App Developer at Uber",
+      year: "2023 Graduate",
       quote:
-        "এডমিশনের শুরু থেকেই আমি উদ্ভাসের ফুল কোর্সে ভর্তি ছিলাম। আমি উদ্ভাসের প্রতিটি ক্লাস-পরীক্ষায় অংশগ্রহণ করতাম। বিশেষ করে, উদ্ভাসের ম্যারাথন ক্লাস ও মাস্টার প্রশ্নব্যাংক আমার প্রস্তুতিতে অনেক সাহায্য করেছে।",
-      position: "৩য়",
+        "The Mobile Development course was incredible. I built 5 real apps during the program and now I'm developing features used by millions of users at Uber. Best investment in my career!",
+      position: "SDE",
       color: "from-purple-500 to-pink-600",
     },
   ];
@@ -56,10 +56,10 @@ export default function TestimonialSection() {
       <div className="container mx-auto px-4 relative z-10">
         <div className="text-center mb-12">
           <h2 className="text-4xl font-bold text-gray-800 mb-4">
-            সফল যারা, কেমন তারা?
+            Success Stories from Our Alumni
           </h2>
           <p className="text-xl text-gray-600">
-            আমাদের শিক্ষার্থীদের সফলতার গল্প
+            Real careers transformed through our tech programs
           </p>
         </div>
 
@@ -98,7 +98,7 @@ export default function TestimonialSection() {
                     {testimonials[currentTestimonial].achievement}
                   </p>
                   <p className="text-sm text-gray-500">
-                    ভর্তি পরীক্ষা: {testimonials[currentTestimonial].year}
+                    {testimonials[currentTestimonial].year}
                   </p>
                 </div>
 
@@ -168,7 +168,7 @@ export default function TestimonialSection() {
               className="border-blue-500 text-blue-600 hover:bg-blue-50"
             >
               <span className="mr-2">▶️</span>
-              আরও সফলতার গল্প দেখুন
+              Watch More Success Stories
             </Button>
           </div>
         </div>

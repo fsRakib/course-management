@@ -5,30 +5,32 @@ import Link from "next/link";
 export default function WhyChooseUsSection() {
   const reasons = [
     {
-      title: "প্রমাণিত সাফল্যের রেকর্ড",
+      title: "Industry Expert Instructors",
       description:
-        "হাজারো শিক্ষার্থীর সফলতার মাধ্যমে প্রমাণিত আমাদের শিক্ষা পদ্ধতি",
-      icon: "🏆",
-      stats: "৯৫% সাফল্যের হার",
+        "Learn from professionals working at top tech companies like Google, Microsoft, and Amazon",
+      icon: "👨‍💻",
+      stats: "10+ Years Experience",
     },
     {
-      title: "আধুনিক শিক্ষা প্রযুক্তি",
+      title: "Real-World Projects",
       description:
-        "সর্বাধুনিক প্রযুক্তি ব্যবহার করে ইন্টারঅ্যাক্টিভ শিক্ষা প্রদান",
-      icon: "💻",
-      stats: "২৪/৭ অনলাইন সাপোর্ট",
+        "Build actual applications and contribute to open-source projects during your learning journey",
+      icon: "�",
+      stats: "50+ Portfolio Projects",
     },
     {
-      title: "ব্যক্তিগত মনোযোগ",
-      description: "প্রতিটি শিক্ষার্থীর প্রয়োজন অনুযায়ী ব্যক্তিগত গাইডেন্স",
-      icon: "👥",
-      stats: "১:১৫ শিক্ষক-শিক্ষার্থী অনুপাত",
+      title: "Career Support",
+      description:
+        "Get personalized career guidance, resume reviews, and interview preparation",
+      icon: "�",
+      stats: "95% Job Placement Rate",
     },
     {
-      title: "সাশ্রয়ী মূল্য",
-      description: "মানসম্মত শিক্ষা সবার নাগালের মধ্যে রাখার প্রতিশ্রুতি",
-      icon: "💰",
-      stats: "৫০% কম খরচে উন্নত শিক্ষা",
+      title: "Cutting-Edge Curriculum",
+      description:
+        "Stay ahead with the latest technologies and frameworks used in the industry",
+      icon: "⚡",
+      stats: "Updated Every 3 Months",
     },
   ];
 
@@ -43,10 +45,11 @@ export default function WhyChooseUsSection() {
       <div className="container mx-auto px-4 relative z-10">
         <div className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl font-bold text-gray-800 mb-4">
-            কেন <span className="gradient-text">আমাদের</span> বেছে নেবেন?
+            Why Choose <span className="gradient-text">TechEdu</span>?
           </h2>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-            আমাদের অনন্য বৈশিষ্ট্য এবং প্রমাণিত পদ্ধতি আপনার সফলতা নিশ্চিত করে
+            Our unique approach and proven methodology ensure your success in
+            the tech industry
           </p>
         </div>
 
@@ -78,10 +81,11 @@ export default function WhyChooseUsSection() {
         <div className="text-center">
           <Card className="p-8 bg-white/90 backdrop-blur-sm border-0 shadow-xl max-w-4xl mx-auto">
             <h3 className="text-3xl font-bold text-gray-800 mb-4">
-              আপনিও হতে পারেন আমাদের পরবর্তী সফল শিক্ষার্থী!
+              Ready to Transform Your Career in Tech?
             </h3>
             <p className="text-lg text-gray-600 mb-6">
-              আজই যুক্ত হন আমাদের সাথে এবং শুরু করুন আপনার সফলতার যাত্রা
+              Join thousands of successful developers who started their journey
+              with us
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Button
@@ -89,7 +93,7 @@ export default function WhyChooseUsSection() {
                 size="lg"
                 className="bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 px-8 py-3 text-lg"
               >
-                <Link href="/signup">এখনই রেজিস্ট্রেশন করুন</Link>
+                <Link href="/signup">Start Your Journey</Link>
               </Button>
               <Button
                 asChild
@@ -97,7 +101,7 @@ export default function WhyChooseUsSection() {
                 size="lg"
                 className="border-blue-500 text-blue-600 hover:bg-blue-50 px-8 py-3 text-lg"
               >
-                <Link href="/student/dashboard">ফ্রি ট্রায়াল নিন</Link>
+                <Link href="/student/dashboard">Explore Courses</Link>
               </Button>
             </div>
           </Card>
