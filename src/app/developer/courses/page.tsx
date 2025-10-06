@@ -44,7 +44,7 @@ interface Course {
 }
 
 export default function CoursesManagementPage() {
-  const { data: session } = useSession();
+  // const { data: session } = useSession(); // Commented out as unused
   const [courses, setCourses] = useState<Course[]>([]);
   const [loading, setLoading] = useState(true);
   const [isCreateDialogOpen, setIsCreateDialogOpen] = useState(false);

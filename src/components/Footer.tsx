@@ -18,19 +18,19 @@ export default function Footer() {
                 href="https://github.com/techedu"
                 className="text-gray-400 hover:text-white transition-colors flex items-center"
               >
-                <span className="mr-1">⚡</span> GitHub
+                <span className="mr-1"></span> GitHub
               </a>
               <a
                 href="https://linkedin.com/company/techedu"
                 className="text-blue-400 hover:text-blue-300 transition-colors flex items-center"
               >
-                <span className="mr-1">�</span> LinkedIn
+                <span className="mr-1"></span> LinkedIn
               </a>
               <a
                 href="https://twitter.com/techedu"
                 className="text-cyan-400 hover:text-cyan-300 transition-colors flex items-center"
               >
-                <span className="mr-1">🐦</span> Twitter
+                <span className="mr-1"></span> Twitter
               </a>
             </div>
           </div>
@@ -46,7 +46,7 @@ export default function Footer() {
                   href="/student/dashboard"
                   className="text-gray-300 hover:text-white transition-colors flex items-center"
                 >
-                  <span className="mr-2">📚</span> All Courses
+                  <span className="mr-2"></span> All Courses
                 </Link>
               </li>
               <li>
@@ -54,7 +54,7 @@ export default function Footer() {
                   href="/signup"
                   className="text-gray-300 hover:text-white transition-colors flex items-center"
                 >
-                  <span className="mr-2">🚀</span> Get Started
+                  <span className="mr-2"></span> Get Started
                 </Link>
               </li>
               <li>
@@ -62,7 +62,7 @@ export default function Footer() {
                   href="/signin"
                   className="text-gray-300 hover:text-white transition-colors flex items-center"
                 >
-                  <span className="mr-2">🔐</span> Login
+                  <span className="mr-2"></span> Login
                 </Link>
               </li>
               <li>
@@ -70,7 +70,7 @@ export default function Footer() {
                   href="#"
                   className="text-gray-300 hover:text-white transition-colors flex items-center"
                 >
-                  <span className="mr-2">ℹ️</span> About Us
+                  <span className="mr-2"></span> About Us
                 </Link>
               </li>
             </ul>
@@ -83,23 +83,23 @@ export default function Footer() {
             </h4>
             <ul className="space-y-2 text-gray-300">
               <li className="flex items-center">
-                <span className="text-blue-400 mr-2">🤖</span> Machine Learning
+                <span className="text-blue-400 mr-2"></span> Machine Learning
                 & AI
               </li>
               <li className="flex items-center">
-                <span className="text-green-400 mr-2">🌐</span> Full Stack
+                <span className="text-green-400 mr-2"></span> Full Stack
                 Development
               </li>
               <li className="flex items-center">
-                <span className="text-purple-400 mr-2">📱</span> Mobile App
+                <span className="text-purple-400 mr-2"></span> Mobile App
                 Development
               </li>
               <li className="flex items-center">
-                <span className="text-yellow-400 mr-2">🐍</span> Python
+                <span className="text-yellow-400 mr-2"></span> Python
                 Programming
               </li>
               <li className="flex items-center">
-                <span className="text-red-400 mr-2">📊</span> Data Science &
+                <span className="text-red-400 mr-2"></span> Data Science &
                 Analytics
               </li>
             </ul>
@@ -112,19 +112,19 @@ export default function Footer() {
             </h4>
             <div className="space-y-3 text-gray-300">
               <div className="flex items-start">
-                <span className="text-blue-400 mr-2">🌍</span>
+                <span className="text-blue-400 mr-2"></span>
                 <span>Global Online Platform</span>
               </div>
               <div className="flex items-center">
-                <span className="text-green-400 mr-2">�</span>
+                <span className="text-green-400 mr-2"></span>
                 <span>24/7 Support Chat</span>
               </div>
               <div className="flex items-center">
-                <span className="text-yellow-400 mr-2">📧</span>
+                <span className="text-yellow-400 mr-2"></span>
                 <span>hello@techedu.com</span>
               </div>
               <div className="flex items-center">
-                <span className="text-purple-400 mr-2">🎯</span>
+                <span className="text-purple-400 mr-2"></span>
                 <span>Career Guidance</span>
               </div>
             </div>
@@ -135,7 +135,7 @@ export default function Footer() {
         <div className="border-t border-gray-700 mt-8 pt-8 mb-8">
           <div className="bg-gradient-to-r from-blue-900/30 to-purple-900/30 rounded-lg p-6 text-center">
             <h4 className="text-xl font-semibold text-white mb-2">
-              🚀 Stay Updated with Tech Trends
+               Stay Updated with Tech Trends
             </h4>
             <p className="text-gray-300 mb-4">
               Get weekly insights on the latest technologies, career tips, and
@@ -165,7 +165,7 @@ export default function Footer() {
                 🟢 All Systems Operational
               </span>
               <span className="px-2 py-1 bg-blue-900/30 text-blue-400 rounded">
-                🚀 v2.1.0
+                 v2.1.0
               </span>
             </div>
           </div>

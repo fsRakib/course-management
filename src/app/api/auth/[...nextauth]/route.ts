@@ -55,28 +55,49 @@ const handler = NextAuth({
   ],
   session: {
     strategy: "jwt",
+    maxAge: 30 * 24 * 60 * 60, // 30 days
+    updateAge: 24 * 60 * 60, // 24 hours
   },
   callbacks: {
-    async jwt({ token, user }) {
-      // Include role in token when user signs in
+    async jwt({ token, user, trigger, session }) {
+      // Include role and additional user info in token when user signs in
       if (user) {
         token.role = user.role;
+        token.name = user.name;
+        token.email = user.email;
       }
+
+      // Handle session updates
+      if (trigger === "update" && session) {
+        token = { ...token, ...session };
+      }
+
       return token;
     },
     async session({ session, token }) {
-      // Include role in session from token
+      // Include role and user info in session from token
       if (token && session.user) {
         session.user.id = token.sub!;
-        session.user.role = token.role;
+        session.user.role = token.role as string;
+        session.user.name = token.name as string;
+        session.user.email = token.email as string;
       }
       return session;
     },
+    async redirect({ url, baseUrl }) {
+      // Allows relative callback URLs
+      if (url.startsWith("/")) return `${baseUrl}${url}`;
+      // Allows callback URLs on the same origin
+      else if (new URL(url).origin === baseUrl) return url;
+      return baseUrl;
+    },
   },
   pages: {
-    signIn: "/signin",
+    signIn: "/",
+    error: "/",
   },
   secret: process.env.NEXTAUTH_SECRET,
+  debug: process.env.NODE_ENV === "development",
 });
 
 export { handler as GET, handler as POST };

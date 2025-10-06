@@ -113,7 +113,7 @@ export default function HeroBanner({ onAuthModalOpen }: HeroBannerProps = {}) {
             <Button
               variant="outline"
               size="lg"
-              className="border-white text-white hover:bg-white hover:text-blue-600 px-8 py-3 text-lg transform hover:scale-105 transition-all"
+              className="border-white text-black hover:bg-white hover:text-blue-600 px-8 py-3 text-lg transform hover:scale-105 transition-all"
               onClick={() => onAuthModalOpen?.("signup")}
             >
               Start Learning Free

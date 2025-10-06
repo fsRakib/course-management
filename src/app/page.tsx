@@ -1,6 +1,8 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useSession } from "next-auth/react";
+import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
@@ -10,12 +12,40 @@ import TestimonialSection from "@/components/TestimonialSection";
 import ServicesSection from "@/components/ServicesSection";
 import WhyChooseUsSection from "@/components/WhyChooseUsSection";
 import { AuthModal } from "@/components/AuthModal";
+import { getDashboardPath } from "@/lib/auth-utils";
 
 export default function Home() {
+  const { data: session, status } = useSession();
+  const router = useRouter();
   const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
   const [authModalMode, setAuthModalMode] = useState<"signin" | "signup">(
     "signup"
   );
+
+  // Redirect logged-in users to their dashboard
+  useEffect(() => {
+    if (status === "authenticated" && session?.user?.role) {
+      const dashboardPath = getDashboardPath(session.user.role);
+      router.push(dashboardPath);
+    }
+  }, [status, session, router]);
+
+  // Show loading spinner while checking authentication
+  if (status === "loading") {
+    return (
+      <div className="min-h-screen bg-gradient-to-br from-indigo-50 via-white to-purple-50 flex items-center justify-center">
+        <div className="text-center">
+          <div className="animate-spin w-12 h-12 border-4 border-indigo-600 border-t-transparent rounded-full mx-auto mb-4"></div>
+          <p className="text-gray-600 text-lg">Loading...</p>
+        </div>
+      </div>
+    );
+  }
+
+  // Don't render the home page if user is authenticated (they will be redirected)
+  if (status === "authenticated") {
+    return null;
+  }
   return (
     <div className="min-h-screen bg-gradient-to-b from-white to-gray-50">
       {/* Hero Section */}

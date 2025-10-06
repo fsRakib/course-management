@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { signIn, getSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
@@ -46,6 +46,14 @@ export function AuthModal({
     setShowPassword(false);
     setShowConfirmPassword(false);
   };
+
+  // Update mode when initialMode prop changes
+  useEffect(() => {
+    if (isOpen) {
+      setMode(initialMode);
+      resetForm();
+    }
+  }, [initialMode, isOpen]);
 
   const handleClose = () => {
     resetForm();
@@ -133,7 +141,7 @@ export function AuthModal({
           }
         }, 1000);
       }
-    } catch (error) {
+    } catch (_error) {
       showToast({
         type: "error",
         title: "Connection Error",
@@ -207,7 +215,7 @@ export function AuthModal({
           message: data.message || "An error occurred during registration.",
         });
       }
-    } catch (error) {
+    } catch (_error) {
       showToast({
         type: "error",
         title: "Connection Error",

@@ -36,7 +36,7 @@ interface AdminStats {
 export default function AdminDashboard() {
   const { data: session, status } = useSession();
   const router = useRouter();
-  const [users, setUsers] = useState<User[]>([]);
+  // const [users, setUsers] = useState<User[]>([]); // Commented out as unused
   const [courses, setCourses] = useState<Course[]>([]);
   const [stats, setStats] = useState<AdminStats>({
     totalUsers: 0,

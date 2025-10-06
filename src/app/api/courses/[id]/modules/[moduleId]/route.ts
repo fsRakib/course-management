@@ -1,7 +1,9 @@
 import { NextRequest, NextResponse } from "next/server";
 import dbConnect from "@/lib/mongodb";
 import { Course } from "@/models";
+import { IModule } from "@/models";
 import { getToken } from "next-auth/jwt";
+import mongoose from "mongoose";
 
 // PUT /api/courses/[id]/modules/[moduleId] - Update a module
 export async function PUT(
@@ -51,7 +53,8 @@ export async function PUT(
 
     // Find and update the module
     const moduleIndex = course.modules.findIndex(
-      (module: any) => module._id.toString() === moduleId
+      (module: IModule & { _id: mongoose.Types.ObjectId }) =>
+        module._id.toString() === moduleId
     );
 
     if (moduleIndex === -1) {
@@ -128,7 +131,8 @@ export async function DELETE(
 
     // Find and remove the module
     const moduleIndex = course.modules.findIndex(
-      (module: any) => module._id.toString() === moduleId
+      (module: IModule & { _id: mongoose.Types.ObjectId }) =>
+        module._id.toString() === moduleId
     );
 
     if (moduleIndex === -1) {

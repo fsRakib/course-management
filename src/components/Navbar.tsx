@@ -6,10 +6,11 @@ import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { AuthModal } from "@/components/AuthModal";
 import { useState } from "react";
+import { getDashboardPath, getRoleDisplayName } from "@/lib/auth-utils";
 
 export default function Navbar() {
   const { data: session, status } = useSession();
-  const router = useRouter();
+  // const router = useRouter(); // Commented out as unused
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
   const [authModalMode, setAuthModalMode] = useState<"signin" | "signup">(
@@ -22,30 +23,7 @@ export default function Navbar() {
 
   const getDashboardLink = () => {
     if (!session?.user?.role) return "/";
-
-    switch (session.user.role) {
-      case "student":
-        return "/student/dashboard";
-      case "developer":
-        return "/developer/dashboard";
-      case "socialMediaManager":
-        return "/manager/dashboard";
-      case "admin":
-        return "/admin/dashboard";
-      case "instructor":
-        return "/instructor/dashboard";
-      default:
-        return "/user/dashboard";
-    }
-  };
-
-  const getRoleDisplayName = (role: string) => {
-    switch (role) {
-      case "socialMediaManager":
-        return "Manager";
-      default:
-        return role.charAt(0).toUpperCase() + role.slice(1);
-    }
+    return getDashboardPath(session.user.role);
   };
 
   return (

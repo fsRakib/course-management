@@ -1,5 +1,6 @@
 import { DefaultSession, DefaultUser } from "next-auth";
-import { JWT, DefaultJWT } from "next-auth/jwt";
+import { DefaultJWT } from "next-auth/jwt";
+// import { JWT } from "next-auth/jwt"; // Commented out as unused
 
 declare module "next-auth" {
   interface Session {

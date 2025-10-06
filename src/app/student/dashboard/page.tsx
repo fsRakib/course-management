@@ -91,22 +91,24 @@ export default function StudentDashboard() {
       const response = await fetch("/api/courses");
       if (response.ok) {
         const data = await response.json();
-        const transformedCourses = (data.courses || []).map((course: any) => ({
-          ...course,
-          features: [
-            `${course.modules?.length || 0} modules included`,
-            "Expert instructors and quality content",
-            "Interactive learning experience",
-            "24/7 student support available",
-            "Certificate upon completion",
-            "Lifetime access to materials",
-          ],
-          enrollmentType: "online" as const,
-          price: Math.floor(Math.random() * 5000) + 1000,
-          startDate: new Date(
-            Date.now() + Math.random() * 30 * 24 * 60 * 60 * 1000
-          ).toISOString(),
-        }));
+        const transformedCourses = (data.courses || []).map(
+          (course: Course) => ({
+            ...course,
+            features: [
+              `${course.modules?.length || 0} modules included`,
+              "Expert instructors and quality content",
+              "Interactive learning experience",
+              "24/7 student support available",
+              "Certificate upon completion",
+              "Lifetime access to materials",
+            ],
+            enrollmentType: "online" as const,
+            price: Math.floor(Math.random() * 5000) + 1000,
+            startDate: new Date(
+              Date.now() + Math.random() * 30 * 24 * 60 * 60 * 1000
+            ).toISOString(),
+          })
+        );
         setCourses(transformedCourses);
 
         // Mock student stats based on course data

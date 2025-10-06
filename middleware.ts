@@ -1,6 +1,11 @@
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 import { getToken } from "next-auth/jwt";
+import {
+  getDashboardPath,
+  canAccessRoute,
+  isPublicRoute,
+} from "@/lib/auth-utils";
 
 export async function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
@@ -11,56 +16,34 @@ export async function middleware(request: NextRequest) {
     secret: process.env.NEXTAUTH_SECRET,
   });
 
-  // Define protected routes and their required roles
-  const roleBasedRoutes = {
-    "/developer": ["developer"],
-    "/manager": ["socialMediaManager"],
-    "/student": ["student"],
-  };
-
-  // Check if the current path matches any protected route
-  const protectedRoute = Object.keys(roleBasedRoutes).find((route) =>
-    pathname.startsWith(route)
-  );
-
-  // If accessing a protected route
-  if (protectedRoute) {
-    // Redirect to signin if not authenticated
-    if (!token) {
-      const signInUrl = new URL("/signin", request.url);
-      signInUrl.searchParams.set("callbackUrl", pathname);
-      return NextResponse.redirect(signInUrl);
-    }
-
-    // Check if user has required role for this route
-    const requiredRoles =
-      roleBasedRoutes[protectedRoute as keyof typeof roleBasedRoutes];
-    const userRole = token.role as string;
-
-    if (!requiredRoles.includes(userRole)) {
-      // Redirect to homepage if user doesn't have required role
-      return NextResponse.redirect(new URL("/", request.url));
-    }
+  // Redirect authenticated users from root page to their dashboard
+  if (pathname === "/" && token?.role) {
+    const dashboardPath = getDashboardPath(token.role as string);
+    return NextResponse.redirect(new URL(dashboardPath, request.url));
   }
 
-  // Allow access to public routes and auth routes
+  // Skip middleware for public routes and static assets
   if (
-    pathname.startsWith("/signin") ||
-    pathname.startsWith("/signup") ||
-    pathname.startsWith("/api/auth") ||
-    pathname.startsWith("/api/register") ||
+    isPublicRoute(pathname) ||
     pathname.startsWith("/_next") ||
     pathname.startsWith("/favicon.ico") ||
-    pathname === "/"
+    pathname.startsWith("/api/auth") ||
+    pathname.startsWith("/api/register")
   ) {
     return NextResponse.next();
   }
 
-  // For any other protected routes, check authentication
-  if (!token && !pathname.startsWith("/api")) {
-    const signInUrl = new URL("/signin", request.url);
-    signInUrl.searchParams.set("callbackUrl", pathname);
-    return NextResponse.redirect(signInUrl);
+  // For protected routes, check authentication and authorization
+  if (!token) {
+    // Redirect unauthenticated users to home page
+    return NextResponse.redirect(new URL("/", request.url));
+  }
+
+  // Check if user has permission to access the current route
+  const userRole = token.role as string;
+  if (!canAccessRoute(userRole, pathname)) {
+    // Redirect to unauthorized page if user doesn't have required role
+    return NextResponse.redirect(new URL("/unauthorized", request.url));
   }
 
   return NextResponse.next();

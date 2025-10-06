@@ -3,33 +3,18 @@
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
+import { getDashboardPath, getRoleDisplayName } from "@/lib/auth-utils";
 
 export default function UnauthorizedPage() {
   const { data: session } = useSession();
   const router = useRouter();
 
   const handleGoToDashboard = () => {
-    const userRole = session?.user?.role;
-    switch (userRole) {
-      case "admin":
-        router.push("/admin/dashboard");
-        break;
-      case "instructor":
-        router.push("/instructor/dashboard");
-        break;
-      case "student":
-        router.push("/student/dashboard");
-        break;
-      case "developer":
-        router.push("/developer/dashboard");
-        break;
-      case "socialMediaManager":
-        router.push("/manager/dashboard");
-        break;
-      case "user":
-      default:
-        router.push("/user/dashboard");
-        break;
+    if (session?.user?.role) {
+      const dashboardPath = getDashboardPath(session.user.role);
+      router.push(dashboardPath);
+    } else {
+      router.push("/");
     }
   };
 
@@ -80,7 +65,10 @@ export default function UnauthorizedPage() {
               </svg>
               <div className="text-left">
                 <p className="text-sm font-medium text-yellow-800">
-                  Current Role: {session?.user?.role || "Not authenticated"}
+                  Current Role:{" "}
+                  {session?.user?.role
+                    ? getRoleDisplayName(session.user.role)
+                    : "Not authenticated"}
                 </p>
                 <p className="text-xs text-yellow-700 mt-1">
                   If you believe this is an error, please contact your

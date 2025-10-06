@@ -1,16 +1,25 @@
 "use client";
 
 import { useEffect } from "react";
+import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
+import { getDashboardPath } from "@/lib/auth-utils";
 
 export default function SignInPage() {
   // This page is deprecated - auth is now handled via modal
-  // Redirect to home page
+  const { data: session, status } = useSession();
   const router = useRouter();
 
   useEffect(() => {
-    router.push("/");
-  }, [router]);
+    if (status === "authenticated" && session?.user?.role) {
+      // Redirect authenticated users to their dashboard
+      const dashboardPath = getDashboardPath(session.user.role);
+      router.push(dashboardPath);
+    } else if (status === "unauthenticated") {
+      // Redirect unauthenticated users to home page
+      router.push("/");
+    }
+  }, [status, session, router]);
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-indigo-50 flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">

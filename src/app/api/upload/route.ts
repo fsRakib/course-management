@@ -196,7 +196,7 @@ export async function GET(request: NextRequest) {
     await dbConnect();
 
     // Build query
-    let query: any = {};
+    const query: Record<string, unknown> = {};
 
     // Students can only see public files
     if (token.role === "student") {
