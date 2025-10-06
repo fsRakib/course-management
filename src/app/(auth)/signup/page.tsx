@@ -79,7 +79,7 @@ export default function SignUpPage() {
             </Link>
           </p>
         </div>
-        
+
         <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
           <div className="space-y-4">
             <div>
@@ -98,7 +98,7 @@ export default function SignUpPage() {
                 className="relative block w-full"
               />
             </div>
-            
+
             <div>
               <label htmlFor="email" className="sr-only">
                 Email address
@@ -115,7 +115,7 @@ export default function SignUpPage() {
                 className="relative block w-full"
               />
             </div>
-            
+
             <div>
               <label htmlFor="password" className="sr-only">
                 Password
@@ -132,7 +132,7 @@ export default function SignUpPage() {
                 className="relative block w-full"
               />
             </div>
-            
+
             <div>
               <label htmlFor="confirmPassword" className="sr-only">
                 Confirm Password
@@ -151,7 +151,10 @@ export default function SignUpPage() {
             </div>
 
             <div>
-              <label htmlFor="role" className="block text-sm font-medium text-gray-700 mb-1">
+              <label
+                htmlFor="role"
+                className="block text-sm font-medium text-gray-700 mb-1"
+              >
                 Account Type
               </label>
               <select
@@ -185,11 +188,17 @@ export default function SignUpPage() {
 
           <div className="text-xs text-gray-500 text-center">
             By signing up, you agree to our{" "}
-            <Link href="/terms" className="text-indigo-600 hover:text-indigo-500">
+            <Link
+              href="/terms"
+              className="text-indigo-600 hover:text-indigo-500"
+            >
               Terms of Service
             </Link>{" "}
             and{" "}
-            <Link href="/privacy" className="text-indigo-600 hover:text-indigo-500">
+            <Link
+              href="/privacy"
+              className="text-indigo-600 hover:text-indigo-500"
+            >
               Privacy Policy
             </Link>
           </div>

@@ -10,7 +10,7 @@ const handler = NextAuth({
       name: "credentials",
       credentials: {
         email: { label: "Email", type: "email" },
-        password: { label: "Password", type: "password" }
+        password: { label: "Password", type: "password" },
       },
       async authorize(credentials) {
         if (!credentials?.email || !credentials?.password) {
@@ -19,11 +19,11 @@ const handler = NextAuth({
 
         try {
           await dbConnect();
-          
+
           // Find user and include password for verification
-          const user = await User.findOne({ 
-            email: credentials.email.toLowerCase() 
-          }).select('+password');
+          const user = await User.findOne({
+            email: credentials.email.toLowerCase(),
+          }).select("+password");
 
           if (!user) {
             return null;
@@ -50,8 +50,8 @@ const handler = NextAuth({
           console.error("Authorization error:", error);
           return null;
         }
-      }
-    })
+      },
+    }),
   ],
   session: {
     strategy: "jwt",

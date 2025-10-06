@@ -56,7 +56,7 @@ export async function POST(request: NextRequest) {
     );
   } catch (error) {
     console.error("Signup error:", error);
-    
+
     // Handle mongoose validation errors
     if (error instanceof Error && error.name === "ValidationError") {
       return NextResponse.json(

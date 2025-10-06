@@ -31,7 +31,7 @@ export default function SignInPage() {
       } else {
         // Get the updated session to check user role
         const session = await getSession();
-        
+
         // Redirect based on role or to dashboard
         if (session?.user?.role === "admin") {
           router.push("/admin");
@@ -65,7 +65,7 @@ export default function SignInPage() {
             </Link>
           </p>
         </div>
-        
+
         <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
           <div className="space-y-4">
             <div>
