@@ -22,14 +22,18 @@ export async function middleware(request: NextRequest) {
     return NextResponse.redirect(new URL(dashboardPath, request.url));
   }
 
-  // Skip middleware for public routes and static assets
+  // Skip middleware for static assets and API auth routes
   if (
-    isPublicRoute(pathname) ||
     pathname.startsWith("/_next") ||
     pathname.startsWith("/favicon.ico") ||
     pathname.startsWith("/api/auth") ||
     pathname.startsWith("/api/register")
   ) {
+    return NextResponse.next();
+  }
+
+  // Check if it's a public route (/, /signin, /signup)
+  if (isPublicRoute(pathname)) {
     return NextResponse.next();
   }
 
@@ -42,8 +46,8 @@ export async function middleware(request: NextRequest) {
   // Check if user has permission to access the current route
   const userRole = token.role as string;
   if (!canAccessRoute(userRole, pathname)) {
-    // Redirect to unauthorized page if user doesn't have required role
-    return NextResponse.redirect(new URL("/unauthorized", request.url));
+    // Redirect to root page if user doesn't have required role
+    return NextResponse.redirect(new URL("/", request.url));
   }
 
   return NextResponse.next();

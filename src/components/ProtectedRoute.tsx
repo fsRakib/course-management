@@ -37,7 +37,7 @@ export function ProtectedRoute({
 
       // If specific roles are required, check if user has permission
       if (requiredRoles.length > 0 && !requiredRoles.includes(userRole)) {
-        router.push("/unauthorized");
+        router.push("/");
         return;
       }
 

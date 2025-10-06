@@ -65,7 +65,7 @@ export const canAccessRoute = (
 };
 
 export const isPublicRoute = (pathname: string): boolean => {
-  const publicRoutes = ["/", "/signin", "/signup", "/unauthorized"];
+  const publicRoutes = ["/", "/signin", "/signup"];
 
   return publicRoutes.some(
     (route) => pathname === route || pathname.startsWith("/api/auth")
