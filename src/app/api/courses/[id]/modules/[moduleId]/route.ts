@@ -91,6 +91,85 @@ export async function PUT(
   }
 }
 
+// PATCH /api/courses/[id]/modules/[moduleId] - Partially update a module
+export async function PATCH(
+  request: NextRequest,
+  { params }: { params: Promise<{ id: string; moduleId: string }> }
+) {
+  try {
+    const token = await getToken({
+      req: request,
+      secret: process.env.NEXTAUTH_SECRET,
+    });
+
+    if (!token) {
+      return NextResponse.json(
+        { success: false, message: "Unauthorized" },
+        { status: 401 }
+      );
+    }
+
+    if (!["developer", "admin", "instructor"].includes(token.role as string)) {
+      return NextResponse.json(
+        { success: false, message: "Insufficient permissions" },
+        { status: 403 }
+      );
+    }
+
+    const updateData = await request.json();
+    const { id, moduleId } = await params;
+
+    await dbConnect();
+
+    const course = await Course.findById(id);
+
+    if (!course) {
+      return NextResponse.json(
+        { success: false, message: "Course not found" },
+        { status: 404 }
+      );
+    }
+
+    // Find and partially update the module
+    const moduleIndex = course.modules.findIndex(
+      (module: IModule & { _id: mongoose.Types.ObjectId }) =>
+        module._id.toString() === moduleId
+    );
+
+    if (moduleIndex === -1) {
+      return NextResponse.json(
+        { success: false, message: "Module not found" },
+        { status: 404 }
+      );
+    }
+
+    // Only update the fields provided in the request
+    Object.keys(updateData).forEach((key) => {
+      if (updateData[key] !== undefined) {
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        (course.modules[moduleIndex] as any)[key] = updateData[key];
+      }
+    });
+
+    await course.save();
+
+    return NextResponse.json(
+      {
+        success: true,
+        message: "Module updated successfully",
+        course,
+      },
+      { status: 200 }
+    );
+  } catch (error) {
+    console.error("Error updating module:", error);
+    return NextResponse.json(
+      { success: false, message: "Internal server error" },
+      { status: 500 }
+    );
+  }
+}
+
 // DELETE /api/courses/[id]/modules/[moduleId] - Delete a module
 export async function DELETE(
   request: NextRequest,

@@ -141,7 +141,7 @@ export function AuthModal({
           }
         }, 1000);
       }
-    } catch (_error) {
+    } catch {
       showToast({
         type: "error",
         title: "Connection Error",
@@ -215,7 +215,7 @@ export function AuthModal({
           message: data.message || "An error occurred during registration.",
         });
       }
-    } catch (_error) {
+    } catch {
       showToast({
         type: "error",
         title: "Connection Error",

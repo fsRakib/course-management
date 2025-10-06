@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -35,11 +35,7 @@ export default function EnrolledStudents({
   const [loading, setLoading] = useState(true);
   const [searchTerm, setSearchTerm] = useState("");
 
-  useEffect(() => {
-    fetchCourseStudents();
-  }, [courseId]);
-
-  const fetchCourseStudents = async () => {
+  const fetchCourseStudents = useCallback(async () => {
     try {
       setLoading(true);
       const response = await fetch(`/api/courses/${courseId}/students`);
@@ -56,7 +52,11 @@ export default function EnrolledStudents({
     } finally {
       setLoading(false);
     }
-  };
+  }, [courseId]);
+
+  useEffect(() => {
+    fetchCourseStudents();
+  }, [fetchCourseStudents]);
 
   const filteredStudents = students.filter(
     (student) =>

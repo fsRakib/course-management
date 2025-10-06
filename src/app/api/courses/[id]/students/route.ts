@@ -61,6 +61,7 @@ export async function GET(
     }
 
     // Format student data with mock progress and activity data
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const studentsWithProgress = course.students.map((student: any) => ({
       _id: student._id,
       name: student.name,

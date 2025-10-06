@@ -3,7 +3,7 @@ import dbConnect from "@/lib/mongodb";
 import { Course } from "@/models";
 import { getToken } from "next-auth/jwt";
 
-// GET /api/courses - Get all courses
+// GET /api/courses - Get courses based on user role
 export async function GET(request: NextRequest) {
   try {
     // Verify authentication
@@ -21,7 +21,21 @@ export async function GET(request: NextRequest) {
 
     await dbConnect();
 
-    const courses = await Course.find({})
+    let query = {};
+
+    // Filter courses based on user role
+    if (token.role === "instructor") {
+      // Instructors see only their own courses
+      query = { instructor: token.sub };
+    } else if (token.role === "admin" || token.role === "manager") {
+      // Admins and managers see all courses
+      query = {};
+    } else {
+      // Students and other roles see all available courses
+      query = {};
+    }
+
+    const courses = await Course.find(query)
       .populate("instructor", "name email")
       .populate("students", "name email")
       .sort({ createdAt: -1 });

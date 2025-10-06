@@ -6,13 +6,13 @@ import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 
-interface User {
-  _id: string;
-  name: string;
-  email: string;
-  role: string;
-  createdAt: string;
-}
+// interface User {
+//   _id: string;
+//   name: string;
+//   email: string;
+//   role: string;
+//   createdAt: string;
+// }
 
 interface Course {
   _id: string;
