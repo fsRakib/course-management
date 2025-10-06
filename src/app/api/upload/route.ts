@@ -20,13 +20,18 @@ export async function POST(request: NextRequest) {
     }
 
     // Check if user has permission to upload files
-    const allowedRoles = ["developer", "socialMediaManager", "admin"];
+    const allowedRoles = [
+      "developer",
+      "socialMediaManager",
+      "admin",
+      "instructor",
+    ];
     if (!allowedRoles.includes(token.role as string)) {
       return NextResponse.json(
         {
           success: false,
           message:
-            "Insufficient permissions. Only developers and social media managers can upload files.",
+            "Insufficient permissions. Only developers, instructors, and social media managers can upload files.",
         },
         { status: 403 }
       );

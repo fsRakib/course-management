@@ -23,6 +23,7 @@ export async function GET(request: NextRequest) {
 
     const courses = await Course.find({})
       .populate("instructor", "name email")
+      .populate("students", "name email")
       .sort({ createdAt: -1 });
 
     return NextResponse.json(

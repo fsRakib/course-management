@@ -5,6 +5,8 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
+import CreateCourseForm from "@/components/CreateCourseForm";
+import EnrolledStudents from "@/components/EnrolledStudents";
 
 interface Course {
   _id: string;
@@ -15,6 +17,8 @@ interface Course {
   price?: number;
   enrollmentType: "offline" | "online" | "combo";
   startDate?: string;
+  instructor?: string;
+  students?: string[];
   modules: Array<{
     _id: string;
     title: string;
@@ -45,15 +49,20 @@ export default function InstructorDashboard() {
     completionRate: 0,
   });
   const [loading, setLoading] = useState(true);
+  const [showCreateForm, setShowCreateForm] = useState(false);
+  const [selectedCourseId, setSelectedCourseId] = useState<string | null>(null);
+  const [currentView, setCurrentView] = useState<
+    "dashboard" | "create" | "students"
+  >("dashboard");
 
   useEffect(() => {
     if (status === "unauthenticated") {
-      router.push("/signin");
+      router.push("/");
       return;
     }
 
     if (session?.user?.role !== "instructor") {
-      router.push("/unauthorized");
+      router.push("/");
       return;
     }
 
@@ -64,23 +73,34 @@ export default function InstructorDashboard() {
     try {
       setLoading(true);
 
-      // Fetch courses
+      // Fetch courses for this instructor
       const coursesResponse = await fetch("/api/courses");
       if (coursesResponse.ok) {
         const coursesData = await coursesResponse.json();
         const coursesList = coursesData.courses || [];
-        setCourses(coursesList);
+
+        // Filter courses by instructor ID
+        const instructorCourses = coursesList.filter(
+          (course: Course) => course.instructor === session?.user?.id
+        );
+
+        setCourses(instructorCourses);
 
         // Calculate stats
-        const totalModules = coursesList.reduce(
+        const totalModules = instructorCourses.reduce(
           (sum: number, course: Course) => sum + course.modules.length,
           0
         );
 
+        const totalStudents = instructorCourses.reduce(
+          (sum: number, course: Course) => sum + (course.students?.length || 0),
+          0
+        );
+
         setStats({
-          totalCourses: coursesList.length,
+          totalCourses: instructorCourses.length,
           totalModules,
-          totalStudents: 125, // Mock data - would come from enrollments API
+          totalStudents,
           averageRating: 4.7, // Mock data
           completionRate: 82, // Mock data
         });
@@ -90,6 +110,17 @@ export default function InstructorDashboard() {
     } finally {
       setLoading(false);
     }
+  };
+
+  const handleCourseCreated = () => {
+    setCurrentView("dashboard");
+    setShowCreateForm(false);
+    fetchInstructorData(); // Refresh the data
+  };
+
+  const handleViewStudents = (courseId: string) => {
+    setSelectedCourseId(courseId);
+    setCurrentView("students");
   };
 
   if (status === "loading" || loading) {
@@ -118,6 +149,25 @@ export default function InstructorDashboard() {
     );
   }
 
+  // Render different views based on currentView state
+  if (currentView === "create") {
+    return (
+      <CreateCourseForm
+        onCourseCreated={handleCourseCreated}
+        onCancel={() => setCurrentView("dashboard")}
+      />
+    );
+  }
+
+  if (currentView === "students" && selectedCourseId) {
+    return (
+      <EnrolledStudents
+        courseId={selectedCourseId}
+        onBack={() => setCurrentView("dashboard")}
+      />
+    );
+  }
+
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Header */}
@@ -134,13 +184,26 @@ export default function InstructorDashboard() {
               </p>
             </div>
             <div className="flex items-center space-x-4">
-              <div className="bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm font-medium">
+              <div className="bg-gradient-to-r from-indigo-100 to-purple-100 text-indigo-800 px-4 py-2 rounded-full text-sm font-medium border border-indigo-200">
                 👩‍🏫 Instructor
               </div>
               <Button
-                onClick={() => router.push("/instructor/courses/create")}
-                className="bg-blue-600 hover:bg-blue-700"
+                onClick={() => setCurrentView("create")}
+                className="bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 text-white shadow-lg hover:shadow-xl transition-all duration-200"
               >
+                <svg
+                  className="w-4 h-4 mr-2"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M12 4v16m8-8H4"
+                  />
+                </svg>
                 Create Course
               </Button>
             </div>
@@ -331,24 +394,47 @@ export default function InstructorDashboard() {
                     </div>
                     <div className="flex space-x-2 ml-4">
                       <Button
+                        onClick={() => handleViewStudents(course._id)}
+                        size="sm"
+                        variant="outline"
+                        className="border-indigo-200 text-indigo-600 hover:bg-indigo-50"
+                      >
+                        <svg
+                          className="w-4 h-4 mr-1"
+                          fill="none"
+                          stroke="currentColor"
+                          viewBox="0 0 24 24"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth={2}
+                            d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197m13.5-3.366a2.5 2.5 0 11-5 0 2.5 2.5 0 015 0z"
+                          />
+                        </svg>
+                        Students ({course.students?.length || 0})
+                      </Button>
+                      <Button
                         onClick={() =>
                           router.push(`/instructor/courses/${course._id}/edit`)
                         }
                         size="sm"
                         variant="outline"
                       >
+                        <svg
+                          className="w-4 h-4 mr-1"
+                          fill="none"
+                          stroke="currentColor"
+                          viewBox="0 0 24 24"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth={2}
+                            d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"
+                          />
+                        </svg>
                         Edit
-                      </Button>
-                      <Button
-                        onClick={() =>
-                          router.push(
-                            `/instructor/courses/${course._id}/analytics`
-                          )
-                        }
-                        size="sm"
-                        className="bg-blue-600 hover:bg-blue-700"
-                      >
-                        Analytics
                       </Button>
                     </div>
                   </div>
