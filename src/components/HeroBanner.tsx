@@ -4,7 +4,11 @@ import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 
-export default function HeroBanner() {
+interface HeroBannerProps {
+  onAuthModalOpen?: (mode: "signin" | "signup") => void;
+}
+
+export default function HeroBanner({ onAuthModalOpen }: HeroBannerProps = {}) {
   const [currentSlide, setCurrentSlide] = useState(0);
 
   const slides = [
@@ -107,12 +111,12 @@ export default function HeroBanner() {
               <Link href="/student/dashboard">Explore Courses</Link>
             </Button>
             <Button
-              asChild
               variant="outline"
               size="lg"
               className="border-white text-white hover:bg-white hover:text-blue-600 px-8 py-3 text-lg transform hover:scale-105 transition-all"
+              onClick={() => onAuthModalOpen?.("signup")}
             >
-              <Link href="/signup">Start Learning Free</Link>
+              Start Learning Free
             </Button>
           </div>
 

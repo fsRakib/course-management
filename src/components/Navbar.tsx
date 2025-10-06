@@ -4,12 +4,17 @@ import { useSession, signOut } from "next-auth/react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
+import { AuthModal } from "@/components/AuthModal";
 import { useState } from "react";
 
 export default function Navbar() {
   const { data: session, status } = useSession();
   const router = useRouter();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
+  const [authModalMode, setAuthModalMode] = useState<"signin" | "signup">(
+    "signin"
+  );
 
   const handleSignOut = async () => {
     await signOut({ callbackUrl: "/" });
@@ -68,7 +73,7 @@ export default function Navbar() {
                 </div>
               </div>
               <div className="ml-3">
-                <h1 className="text-xl font-bold text-gray-900">CourseHub</h1>
+                <h1 className="text-xl font-bold text-gray-900">TechEdu</h1>
               </div>
             </Link>
           </div>
@@ -155,14 +160,25 @@ export default function Navbar() {
             ) : (
               /* Unauthenticated User Navigation */
               <div className="flex items-center space-x-4">
-                <Link href="/signin">
-                  <Button variant="outline" size="sm">
-                    Sign In
-                  </Button>
-                </Link>
-                <Link href="/signup">
-                  <Button size="sm">Sign Up</Button>
-                </Link>
+                <Button
+                  variant="outline"
+                  size="sm"
+                  onClick={() => {
+                    setAuthModalMode("signin");
+                    setIsAuthModalOpen(true);
+                  }}
+                >
+                  Sign In
+                </Button>
+                <Button
+                  size="sm"
+                  onClick={() => {
+                    setAuthModalMode("signup");
+                    setIsAuthModalOpen(true);
+                  }}
+                >
+                  Sign Up
+                </Button>
               </div>
             )}
           </div>
@@ -289,28 +305,42 @@ export default function Navbar() {
                 </>
               ) : (
                 <div className="px-3 py-2 space-y-2 border-t border-gray-200 mt-2">
-                  <Link
-                    href="/signin"
-                    onClick={() => setIsMobileMenuOpen(false)}
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    className="w-full"
+                    onClick={() => {
+                      setIsMobileMenuOpen(false);
+                      setAuthModalMode("signin");
+                      setIsAuthModalOpen(true);
+                    }}
                   >
-                    <Button variant="outline" size="sm" className="w-full">
-                      Sign In
-                    </Button>
-                  </Link>
-                  <Link
-                    href="/signup"
-                    onClick={() => setIsMobileMenuOpen(false)}
+                    Sign In
+                  </Button>
+                  <Button
+                    size="sm"
+                    className="w-full"
+                    onClick={() => {
+                      setIsMobileMenuOpen(false);
+                      setAuthModalMode("signup");
+                      setIsAuthModalOpen(true);
+                    }}
                   >
-                    <Button size="sm" className="w-full">
-                      Sign Up
-                    </Button>
-                  </Link>
+                    Sign Up
+                  </Button>
                 </div>
               )}
             </div>
           </div>
         )}
       </div>
+
+      {/* Auth Modal */}
+      <AuthModal
+        isOpen={isAuthModalOpen}
+        onClose={() => setIsAuthModalOpen(false)}
+        initialMode={authModalMode}
+      />
     </nav>
   );
 }

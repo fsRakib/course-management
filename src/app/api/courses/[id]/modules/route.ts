@@ -6,7 +6,7 @@ import { getToken } from "next-auth/jwt";
 // POST /api/courses/[id]/modules - Add a module to a course
 export async function POST(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
     const token = await getToken({
@@ -29,6 +29,7 @@ export async function POST(
     }
 
     const { title, topics, classVideos, files } = await request.json();
+    const { id } = await params;
 
     if (!title) {
       return NextResponse.json(
@@ -39,7 +40,7 @@ export async function POST(
 
     await dbConnect();
 
-    const course = await Course.findById(params.id);
+    const course = await Course.findById(id);
 
     if (!course) {
       return NextResponse.json(

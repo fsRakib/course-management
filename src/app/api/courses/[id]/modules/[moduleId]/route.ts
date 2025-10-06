@@ -6,7 +6,7 @@ import { getToken } from "next-auth/jwt";
 // PUT /api/courses/[id]/modules/[moduleId] - Update a module
 export async function PUT(
   request: NextRequest,
-  { params }: { params: { id: string; moduleId: string } }
+  { params }: { params: Promise<{ id: string; moduleId: string }> }
 ) {
   try {
     const token = await getToken({
@@ -29,6 +29,7 @@ export async function PUT(
     }
 
     const { title, topics, classVideos, files } = await request.json();
+    const { id, moduleId } = await params;
 
     if (!title) {
       return NextResponse.json(
@@ -39,7 +40,7 @@ export async function PUT(
 
     await dbConnect();
 
-    const course = await Course.findById(params.id);
+    const course = await Course.findById(id);
 
     if (!course) {
       return NextResponse.json(
@@ -50,7 +51,7 @@ export async function PUT(
 
     // Find and update the module
     const moduleIndex = course.modules.findIndex(
-      (module: any) => module._id.toString() === params.moduleId
+      (module: any) => module._id.toString() === moduleId
     );
 
     if (moduleIndex === -1) {
@@ -90,7 +91,7 @@ export async function PUT(
 // DELETE /api/courses/[id]/modules/[moduleId] - Delete a module
 export async function DELETE(
   request: NextRequest,
-  { params }: { params: { id: string; moduleId: string } }
+  { params }: { params: Promise<{ id: string; moduleId: string }> }
 ) {
   try {
     const token = await getToken({
@@ -112,9 +113,11 @@ export async function DELETE(
       );
     }
 
+    const { id, moduleId } = await params;
+
     await dbConnect();
 
-    const course = await Course.findById(params.id);
+    const course = await Course.findById(id);
 
     if (!course) {
       return NextResponse.json(
@@ -125,7 +128,7 @@ export async function DELETE(
 
     // Find and remove the module
     const moduleIndex = course.modules.findIndex(
-      (module: any) => module._id.toString() === params.moduleId
+      (module: any) => module._id.toString() === moduleId
     );
 
     if (moduleIndex === -1) {

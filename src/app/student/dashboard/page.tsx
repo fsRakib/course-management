@@ -175,7 +175,7 @@ export default function StudentDashboard() {
         <div className="text-center">
           <div className="text-lg text-red-600">Access Denied</div>
           <p className="text-gray-600 mt-2">
-            You don't have student privileges.
+            You don&apos;t have student privileges.
           </p>
         </div>
       </div>

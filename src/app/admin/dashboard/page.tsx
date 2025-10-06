@@ -112,7 +112,9 @@ export default function AdminDashboard() {
       <div className="min-h-screen flex items-center justify-center bg-gray-50">
         <div className="text-center">
           <div className="text-lg text-red-600">Access Denied</div>
-          <p className="text-gray-600 mt-2">You don't have admin privileges.</p>
+          <p className="text-gray-600 mt-2">
+            You don&apos;t have admin privileges.
+          </p>
         </div>
       </div>
     );

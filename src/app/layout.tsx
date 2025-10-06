@@ -4,6 +4,7 @@ import "./globals.css";
 import Navbar from "@/components/Navbar";
 import AuthProvider from "@/components/AuthProvider";
 import Footer from "@/components/Footer";
+import { ToastProvider } from "@/components/ui/toast";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -16,9 +17,9 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "CourseHub - Course Management Platform",
+  title: "TechEdu - Modern Technology Education Platform",
   description:
-    "A comprehensive course management platform for students, instructors, and administrators",
+    "Transform your career with cutting-edge technology education. Master AI, Web Development, Mobile Apps, and more.",
 };
 
 export default function RootLayout({
@@ -32,11 +33,13 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased min-h-screen bg-gray-50`}
       >
         <AuthProvider>
-          <div className="min-h-screen flex flex-col">
-            <Navbar />
-            <main className="flex-1">{children}</main>
-            <Footer />
-          </div>
+          <ToastProvider>
+            <div className="min-h-screen flex flex-col">
+              <Navbar />
+              <main className="flex-1">{children}</main>
+              <Footer />
+            </div>
+          </ToastProvider>
         </AuthProvider>
       </body>
     </html>

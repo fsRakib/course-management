@@ -111,7 +111,7 @@ export default function InstructorDashboard() {
         <div className="text-center">
           <div className="text-lg text-red-600">Access Denied</div>
           <p className="text-gray-600 mt-2">
-            You don't have instructor privileges.
+            You don&apos;t have instructor privileges.
           </p>
         </div>
       </div>

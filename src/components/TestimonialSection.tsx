@@ -104,13 +104,13 @@ export default function TestimonialSection() {
 
                 <blockquote className="text-gray-700 text-lg leading-relaxed italic relative">
                   <span className="text-6xl text-blue-200 absolute -top-4 -left-4 font-serif">
-                    "
+                    &ldquo;
                   </span>
                   <span className="relative z-10">
                     {testimonials[currentTestimonial].quote}
                   </span>
                   <span className="text-6xl text-blue-200 absolute -bottom-8 -right-4 font-serif">
-                    "
+                    &rdquo;
                   </span>
                 </blockquote>
               </div>

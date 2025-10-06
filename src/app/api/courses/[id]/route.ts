@@ -6,7 +6,7 @@ import { getToken } from "next-auth/jwt";
 // GET /api/courses/[id] - Get a specific course
 export async function GET(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
     const token = await getToken({
@@ -21,9 +21,11 @@ export async function GET(
       );
     }
 
+    const { id } = await params;
+
     await dbConnect();
 
-    const course = await Course.findById(params.id).populate(
+    const course = await Course.findById(id).populate(
       "instructor",
       "name email"
     );
@@ -54,7 +56,7 @@ export async function GET(
 // PUT /api/courses/[id] - Update a course
 export async function PUT(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
     const token = await getToken({
@@ -77,6 +79,7 @@ export async function PUT(
     }
 
     const { title, description } = await request.json();
+    const { id } = await params;
 
     if (!title || !description) {
       return NextResponse.json(
@@ -87,7 +90,7 @@ export async function PUT(
 
     await dbConnect();
 
-    const course = await Course.findById(params.id);
+    const course = await Course.findById(id);
 
     if (!course) {
       return NextResponse.json(
@@ -123,7 +126,7 @@ export async function PUT(
 // DELETE /api/courses/[id] - Delete a course
 export async function DELETE(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
     const token = await getToken({
@@ -145,9 +148,11 @@ export async function DELETE(
       );
     }
 
+    const { id } = await params;
+
     await dbConnect();
 
-    const course = await Course.findById(params.id);
+    const course = await Course.findById(id);
 
     if (!course) {
       return NextResponse.json(
@@ -156,7 +161,7 @@ export async function DELETE(
       );
     }
 
-    await Course.findByIdAndDelete(params.id);
+    await Course.findByIdAndDelete(id);
 
     return NextResponse.json(
       {

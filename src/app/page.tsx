@@ -1,3 +1,6 @@
+"use client";
+
+import { useState } from "react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
@@ -6,12 +9,22 @@ import SuccessStats from "@/components/SuccessStats";
 import TestimonialSection from "@/components/TestimonialSection";
 import ServicesSection from "@/components/ServicesSection";
 import WhyChooseUsSection from "@/components/WhyChooseUsSection";
+import { AuthModal } from "@/components/AuthModal";
 
 export default function Home() {
+  const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
+  const [authModalMode, setAuthModalMode] = useState<"signin" | "signup">(
+    "signup"
+  );
   return (
     <div className="min-h-screen bg-gradient-to-b from-white to-gray-50">
       {/* Hero Section */}
-      <HeroBanner />
+      <HeroBanner
+        onAuthModalOpen={(mode) => {
+          setAuthModalMode(mode);
+          setIsAuthModalOpen(true);
+        }}
+      />
 
       {/* Featured Programs Section */}
       <section className="py-16 bg-white">
@@ -58,7 +71,14 @@ export default function Home() {
                   <Button className="flex-1 bg-green-500 hover:bg-green-600">
                     Learn More
                   </Button>
-                  <Button variant="outline" className="flex-1">
+                  <Button
+                    variant="outline"
+                    className="flex-1"
+                    onClick={() => {
+                      setAuthModalMode("signup");
+                      setIsAuthModalOpen(true);
+                    }}
+                  >
                     Enroll Now
                   </Button>
                 </div>
@@ -96,7 +116,14 @@ export default function Home() {
                   <Button className="flex-1 bg-blue-500 hover:bg-blue-600">
                     Learn More
                   </Button>
-                  <Button variant="outline" className="flex-1">
+                  <Button
+                    variant="outline"
+                    className="flex-1"
+                    onClick={() => {
+                      setAuthModalMode("signup");
+                      setIsAuthModalOpen(true);
+                    }}
+                  >
                     Enroll Now
                   </Button>
                 </div>
@@ -134,7 +161,14 @@ export default function Home() {
                   <Button className="flex-1 bg-purple-500 hover:bg-purple-600">
                     Learn More
                   </Button>
-                  <Button variant="outline" className="flex-1">
+                  <Button
+                    variant="outline"
+                    className="flex-1"
+                    onClick={() => {
+                      setAuthModalMode("signup");
+                      setIsAuthModalOpen(true);
+                    }}
+                  >
                     Enroll Now
                   </Button>
                 </div>
@@ -172,7 +206,14 @@ export default function Home() {
                   <Button className="flex-1 bg-yellow-500 hover:bg-yellow-600">
                     Learn More
                   </Button>
-                  <Button variant="outline" className="flex-1">
+                  <Button
+                    variant="outline"
+                    className="flex-1"
+                    onClick={() => {
+                      setAuthModalMode("signup");
+                      setIsAuthModalOpen(true);
+                    }}
+                  >
                     Enroll Now
                   </Button>
                 </div>
@@ -210,7 +251,14 @@ export default function Home() {
                   <Button className="flex-1 bg-red-500 hover:bg-red-600">
                     Learn More
                   </Button>
-                  <Button variant="outline" className="flex-1">
+                  <Button
+                    variant="outline"
+                    className="flex-1"
+                    onClick={() => {
+                      setAuthModalMode("signup");
+                      setIsAuthModalOpen(true);
+                    }}
+                  >
                     Enroll Now
                   </Button>
                 </div>
@@ -248,7 +296,14 @@ export default function Home() {
                   <Button className="flex-1 bg-indigo-500 hover:bg-indigo-600">
                     Learn More
                   </Button>
-                  <Button variant="outline" className="flex-1">
+                  <Button
+                    variant="outline"
+                    className="flex-1"
+                    onClick={() => {
+                      setAuthModalMode("signup");
+                      setIsAuthModalOpen(true);
+                    }}
+                  >
                     Enroll Now
                   </Button>
                 </div>
@@ -282,11 +337,14 @@ export default function Home() {
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Button
-              asChild
               size="lg"
               className="bg-white text-purple-600 hover:bg-gray-100 px-8 py-3 text-lg font-semibold"
+              onClick={() => {
+                setAuthModalMode("signup");
+                setIsAuthModalOpen(true);
+              }}
             >
-              <Link href="/signup">Get Started Free</Link>
+              Get Started Free
             </Button>
             <Button
               asChild
@@ -299,6 +357,13 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      {/* Auth Modal */}
+      <AuthModal
+        isOpen={isAuthModalOpen}
+        onClose={() => setIsAuthModalOpen(false)}
+        initialMode={authModalMode}
+      />
     </div>
   );
 }

@@ -101,7 +101,7 @@ export default function SuccessStats() {
       count: 50,
       suffix: "+",
       title: "Industry Awards",
-      subtitle: "Won by our students & faculty",
+      subtitle: "Won by our students &amp; faculty",
       color: "bg-green-500",
     },
   ];
@@ -127,7 +127,7 @@ export default function SuccessStats() {
             Incredible Success Metrics
           </h2>
           <p className="text-xl text-blue-100">
-            Real numbers showcasing our students' achievements in tech
+            Real numbers showcasing our students&apos; achievements in tech
           </p>
         </div>
 
