@@ -4,6 +4,7 @@ import { useSession } from "next-auth/react";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
+import FileUploadComponent from "@/components/FileUploadComponent";
 
 interface Course {
   _id: string;
@@ -284,6 +285,22 @@ export default function ManagerDashboard() {
               </div>
             </Button>
           </div>
+        </div>
+
+        {/* File Upload Section */}
+        <div className="bg-white rounded-lg shadow-sm p-6 mb-8">
+          <h2 className="text-xl font-bold text-gray-900 mb-4">
+            Upload Materials
+          </h2>
+          <p className="text-gray-600 mb-4">
+            Upload lecture videos, PDFs, and other materials for students
+          </p>
+          <FileUploadComponent
+            courses={courses}
+            onUploadSuccess={() => {
+              console.log("File uploaded successfully");
+            }}
+          />
         </div>
 
         {/* Recent Activity & Courses */}

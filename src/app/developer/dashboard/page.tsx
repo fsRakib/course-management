@@ -4,6 +4,7 @@ import { useSession } from "next-auth/react";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
+import FileUploadComponent from "@/components/FileUploadComponent";
 
 interface Course {
   _id: string;
@@ -243,6 +244,13 @@ export default function DeveloperDashboard() {
               </svg>
               Create New Course
             </Button>
+            <FileUploadComponent
+              courses={courses}
+              onUploadSuccess={() => {
+                // Optionally refresh data after upload
+                console.log("File uploaded successfully");
+              }}
+            />
           </div>
         </div>
 
