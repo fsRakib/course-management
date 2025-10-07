@@ -40,7 +40,7 @@ export function SessionProvider({ children }: { children: React.ReactNode }) {
 
     // Redirect authenticated users from public pages to their dashboard
     if (status === "authenticated" && session?.user?.role) {
-      // Only redirect from root page, not from other public pages like /unauthorized
+      // Only redirect from root page, not from other public pages like /
       if (pathname === "/") {
         const dashboardPath = getDashboardPath(session.user.role);
         router.push(dashboardPath);
@@ -52,7 +52,7 @@ export function SessionProvider({ children }: { children: React.ReactNode }) {
         !isPublicRoute(pathname) &&
         !canAccessRoute(session.user.role, pathname)
       ) {
-        router.push("/unauthorized");
+        router.push("/");
         return;
       }
     }

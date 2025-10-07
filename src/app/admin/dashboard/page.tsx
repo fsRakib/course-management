@@ -54,7 +54,7 @@ export default function AdminDashboard() {
     }
 
     if (session?.user?.role !== "admin") {
-      router.push("/unauthorized");
+      router.push("/");
       return;
     }
 
@@ -92,6 +92,14 @@ export default function AdminDashboard() {
     } finally {
       setLoading(false);
     }
+  };
+
+  const handleManageUsers = () => {
+    router.push("/admin/users");
+  };
+
+  const handleManageCourses = () => {
+    router.push("/admin/courses");
   };
 
   if (status === "loading" || loading) {
@@ -139,10 +147,16 @@ export default function AdminDashboard() {
                 🔐 Admin Access
               </div>
               <Button
-                onClick={() => router.push("/admin/users")}
+                onClick={handleManageUsers}
                 className="bg-blue-600 hover:bg-blue-700"
               >
                 Manage Users
+              </Button>
+              <Button
+                onClick={handleManageCourses}
+                className="bg-green-600 hover:bg-green-700"
+              >
+                Manage Courses
               </Button>
             </div>
           </div>

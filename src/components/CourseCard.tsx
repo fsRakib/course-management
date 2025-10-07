@@ -12,15 +12,30 @@ interface CourseCardProps {
     price?: number;
     enrollmentType: "offline" | "online" | "combo";
     startDate?: string;
+    modules?: Array<{
+      _id: string;
+      title: string;
+      topics: string[];
+      classVideos: string[];
+      files: string[];
+    }>;
   };
+  isEnrolled?: boolean;
   onEnroll?: (courseId: string) => void;
+  onUnenroll?: (courseId: string) => void;
   onViewDetails?: (courseId: string) => void;
+  onAccessCourse?: (courseId: string) => void;
+  isLoading?: boolean;
 }
 
 export default function CourseCard({
   course,
+  isEnrolled = false,
   onEnroll,
+  onUnenroll,
   onViewDetails,
+  onAccessCourse,
+  isLoading = false,
 }: CourseCardProps) {
   return (
     <Card className="group hover:shadow-xl transition-all duration-300 bg-white rounded-2xl overflow-hidden border-0 shadow-lg">
@@ -41,9 +56,14 @@ export default function CourseCard({
             </div>
           </div>
         )}
-        {course.price && (
+        {course.price && !isEnrolled && (
           <div className="absolute top-4 right-4 bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full text-sm font-semibold text-gray-800">
             ৳{course.price}
+          </div>
+        )}
+        {isEnrolled && (
+          <div className="absolute top-4 right-4 bg-green-500/90 backdrop-blur-sm px-3 py-1 rounded-full text-sm font-semibold text-white">
+            Enrolled ✓
           </div>
         )}
       </div>
@@ -96,21 +116,68 @@ export default function CourseCard({
           )}
         </div>
 
+        {/* Course Stats */}
+        {course.modules && (
+          <div className="flex items-center gap-4 text-sm text-gray-600 mb-4">
+            <span>📚 {course.modules.length} modules</span>
+            <span>
+              🎥{" "}
+              {course.modules.reduce(
+                (acc, module) => acc + module.classVideos.length,
+                0
+              )}{" "}
+              videos
+            </span>
+            <span>
+              📄{" "}
+              {course.modules.reduce(
+                (acc, module) => acc + module.files.length,
+                0
+              )}{" "}
+              files
+            </span>
+          </div>
+        )}
+
         {/* Action Buttons */}
         <div className="flex gap-3">
           <Button
             onClick={() => onViewDetails?.(course._id)}
             variant="outline"
             className="flex-1 border-gray-300 hover:border-blue-500 hover:text-blue-600 transition-colors"
+            disabled={isLoading}
           >
             Details
           </Button>
-          <Button
-            onClick={() => onEnroll?.(course._id)}
-            className="flex-1 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white border-0 shadow-md hover:shadow-lg transition-all"
-          >
-            Enroll Now
-          </Button>
+
+          {isEnrolled ? (
+            <div className="flex-1 flex gap-2">
+              <Button
+                onClick={() => onAccessCourse?.(course._id)}
+                className="flex-1 bg-gradient-to-r from-green-600 to-green-700 hover:from-green-700 hover:to-green-800 text-white border-0 shadow-md hover:shadow-lg transition-all"
+                disabled={isLoading}
+              >
+                Access Course
+              </Button>
+              <Button
+                onClick={() => onUnenroll?.(course._id)}
+                variant="outline"
+                className="px-3 border-red-300 text-red-600 hover:border-red-500 hover:text-red-700 transition-colors"
+                disabled={isLoading}
+                title="Unenroll from course"
+              >
+                ✕
+              </Button>
+            </div>
+          ) : (
+            <Button
+              onClick={() => onEnroll?.(course._id)}
+              className="flex-1 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white border-0 shadow-md hover:shadow-lg transition-all"
+              disabled={isLoading}
+            >
+              {isLoading ? "Enrolling..." : "Enroll Now"}
+            </Button>
+          )}
         </div>
       </div>
     </Card>

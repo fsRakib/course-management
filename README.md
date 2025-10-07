@@ -1,6 +1,8 @@
-# CourseHub - Course Management Platform
+# 🎓 CourseHub - Advanced Course Management Platform
 
-A comprehensive course management platform built with Next.js, NextAuth.js, and MongoDB. This platform supports multiple user roles (students, instructors, developers, managers) with role-based access control, course management, and file upload capabilities.
+A feature-rich, production-ready course management platform built with Next.js 15, NextAuth.js, MongoDB, and Cloudinary. Supporting comprehensive role-based learning management with modern UI/UX design.
+
+## ✨ **DEPLOYMENT READY** - Build Status: ✅ PASSING
 
 ## Features
 

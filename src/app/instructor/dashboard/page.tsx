@@ -5,8 +5,6 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
-import CreateCourseForm from "@/components/CreateCourseForm";
-import EnrolledStudents from "@/components/EnrolledStudents";
 
 interface Course {
   _id: string;
@@ -49,10 +47,6 @@ export default function InstructorDashboard() {
     completionRate: 0,
   });
   const [loading, setLoading] = useState(true);
-  const [selectedCourseId, setSelectedCourseId] = useState<string | null>(null);
-  const [currentView, setCurrentView] = useState<
-    "dashboard" | "create" | "students"
-  >("dashboard");
 
   useEffect(() => {
     if (status === "unauthenticated") {
@@ -67,6 +61,23 @@ export default function InstructorDashboard() {
 
     fetchInstructorData();
   }, [session, status, router]);
+
+  // Add effect to handle footer spacing for sidebar
+  useEffect(() => {
+    // Add left margin to footer when component mounts
+    const footer = document.querySelector("footer");
+    if (footer) {
+      footer.style.marginLeft = "320px"; // 80 * 0.25rem = 320px (w-80)
+    }
+
+    // Cleanup: Remove the margin when component unmounts
+    return () => {
+      const footer = document.querySelector("footer");
+      if (footer) {
+        footer.style.marginLeft = "0";
+      }
+    };
+  }, []);
 
   const fetchInstructorData = async () => {
     try {
@@ -106,14 +117,8 @@ export default function InstructorDashboard() {
     }
   };
 
-  const handleCourseCreated = () => {
-    setCurrentView("dashboard");
-    fetchInstructorData(); // Refresh the data
-  };
-
   const handleViewStudents = (courseId: string) => {
-    setSelectedCourseId(courseId);
-    setCurrentView("students");
+    router.push(`/instructor/courses/${courseId}/students`);
   };
 
   if (status === "loading" || loading) {
@@ -142,148 +147,142 @@ export default function InstructorDashboard() {
     );
   }
 
-  // Render different views based on currentView state
-  if (currentView === "create") {
-    return (
-      <CreateCourseForm
-        onCourseCreated={handleCourseCreated}
-        onCancel={() => setCurrentView("dashboard")}
-      />
-    );
-  }
+  // Navigation handlers (no more embedded views)
+  const handleCreateCourse = () => {
+    router.push("/instructor/courses/create");
+  };
 
-  if (currentView === "students" && selectedCourseId) {
-    return (
-      <EnrolledStudents
-        courseId={selectedCourseId}
-        onBack={() => setCurrentView("dashboard")}
-      />
-    );
-  }
+  const handleViewAllCourses = () => {
+    router.push("/instructor/courses");
+  };
 
   return (
-    <div className="min-h-screen bg-gray-50 flex">
-      {/* Sidebar */}
-      <aside className="w-80 bg-gradient-to-b from-indigo-900 via-purple-900 to-pink-900 text-white p-6 shadow-2xl">
-        <div className="mb-8">
-          <div className="flex items-center mb-4">
-            <div className="w-12 h-12 bg-gradient-to-r from-yellow-400 to-orange-500 rounded-full flex items-center justify-center text-2xl font-bold text-white shadow-lg">
-              {session.user?.name?.charAt(0).toUpperCase()}
-            </div>
-            <div className="ml-4">
-              <h2 className="text-xl font-bold">{session.user?.name}</h2>
-              <div className="flex items-center mt-1">
-                <div className="bg-gradient-to-r from-indigo-400 to-purple-400 text-white px-3 py-1 rounded-full text-sm font-medium">
-                  👩‍🏫 Instructor
+    <div className="min-h-screen bg-gradient-to-br from-gray-50 to-indigo-50 flex">
+      {/* Fixed Sidebar */}
+      <aside className="w-80 bg-gradient-to-b from-indigo-900 via-purple-900 to-pink-900 text-white shadow-2xl fixed left-0 top-20 h-[calc(100vh-80px)] overflow-y-auto z-10">
+        <div className="p-6">
+          <div className="mb-8">
+            <div className="flex items-center mb-4">
+              <div className="w-12 h-12 bg-gradient-to-r from-yellow-400 to-orange-500 rounded-full flex items-center justify-center text-2xl font-bold text-white shadow-lg">
+                {session.user?.name?.charAt(0).toUpperCase()}
+              </div>
+              <div className="ml-4">
+                <h2 className="text-xl font-bold">{session.user?.name}</h2>
+                <div className="flex items-center mt-1">
+                  <div className="bg-gradient-to-r from-indigo-400 to-purple-400 text-white px-3 py-1 rounded-full text-sm font-medium">
+                    👩‍🏫 Instructor
+                  </div>
                 </div>
               </div>
             </div>
+            <div className="bg-white/10 backdrop-blur-sm rounded-xl p-4 border border-white/20">
+              <h1 className="text-2xl font-bold mb-2">Instructor Dashboard</h1>
+              <p className="text-indigo-200">
+                Ready to inspire students today?
+              </p>
+            </div>
           </div>
-          <div className="bg-white/10 backdrop-blur-sm rounded-xl p-4 border border-white/20">
-            <h1 className="text-2xl font-bold mb-2">Instructor Dashboard</h1>
-            <p className="text-indigo-200">Ready to inspire students today?</p>
+
+          {/* Quick Actions in Sidebar */}
+          <div className="space-y-3">
+            <h3 className="text-lg font-semibold mb-4 text-indigo-200">
+              Quick Actions
+            </h3>
+
+            <Button
+              onClick={handleCreateCourse}
+              className="w-full justify-start bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 text-white shadow-lg hover:shadow-xl transition-all duration-200 border-0"
+            >
+              <svg
+                className="w-5 h-5 mr-3"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M12 4v16m8-8H4"
+                />
+              </svg>
+              Create New Course
+            </Button>
+
+            <Button
+              onClick={() => router.push("/instructor/students")}
+              className="w-full justify-start bg-white/10 hover:bg-white/20 text-white border border-white/20 hover:border-white/30 transition-all duration-200"
+              variant="outline"
+            >
+              <svg
+                className="w-5 h-5 mr-3"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"
+                />
+              </svg>
+              View Students
+            </Button>
+
+            <Button
+              onClick={() => router.push("/instructor/analytics")}
+              className="w-full justify-start bg-white/10 hover:bg-white/20 text-white border border-white/20 hover:border-white/30 transition-all duration-200"
+              variant="outline"
+            >
+              <svg
+                className="w-5 h-5 mr-3"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"
+                />
+              </svg>
+              View Analytics
+            </Button>
+
+            <Button
+              onClick={() => router.push("/instructor/settings")}
+              className="w-full justify-start bg-white/10 hover:bg-white/20 text-white border border-white/20 hover:border-white/30 transition-all duration-200"
+              variant="outline"
+            >
+              <svg
+                className="w-5 h-5 mr-3"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"
+                />
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
+                />
+              </svg>
+              Settings
+            </Button>
           </div>
-        </div>
-
-        {/* Quick Actions in Sidebar */}
-        <div className="space-y-3">
-          <h3 className="text-lg font-semibold mb-4 text-indigo-200">
-            Quick Actions
-          </h3>
-
-          <Button
-            onClick={() => setCurrentView("create")}
-            className="w-full justify-start bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 text-white shadow-lg hover:shadow-xl transition-all duration-200 border-0"
-          >
-            <svg
-              className="w-5 h-5 mr-3"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M12 4v16m8-8H4"
-              />
-            </svg>
-            Create New Course
-          </Button>
-
-          <Button
-            onClick={() => router.push("/instructor/students")}
-            className="w-full justify-start bg-white/10 hover:bg-white/20 text-white border border-white/20 hover:border-white/30 transition-all duration-200"
-            variant="outline"
-          >
-            <svg
-              className="w-5 h-5 mr-3"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"
-              />
-            </svg>
-            View Students
-          </Button>
-
-          <Button
-            onClick={() => router.push("/instructor/analytics")}
-            className="w-full justify-start bg-white/10 hover:bg-white/20 text-white border border-white/20 hover:border-white/30 transition-all duration-200"
-            variant="outline"
-          >
-            <svg
-              className="w-5 h-5 mr-3"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"
-              />
-            </svg>
-            View Analytics
-          </Button>
-
-          <Button
-            onClick={() => router.push("/instructor/settings")}
-            className="w-full justify-start bg-white/10 hover:bg-white/20 text-white border border-white/20 hover:border-white/30 transition-all duration-200"
-            variant="outline"
-          >
-            <svg
-              className="w-5 h-5 mr-3"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"
-              />
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
-              />
-            </svg>
-            Settings
-          </Button>
         </div>
       </aside>
 
-      {/* Main Content */}
-      <main className="flex-1 p-8">
+      {/* Main Content with left margin to account for fixed sidebar */}
+      <main className="flex-1 p-8 ml-80">
         {/* Stats Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6 mb-8">
           <Card className="p-6 bg-gradient-to-br from-blue-50 to-blue-100 border-blue-200">
@@ -435,7 +434,7 @@ export default function InstructorDashboard() {
                   My Courses
                 </h2>
                 <Button
-                  onClick={() => router.push("/instructor/courses")}
+                  onClick={handleViewAllCourses}
                   variant="outline"
                   size="sm"
                 >
@@ -533,7 +532,7 @@ export default function InstructorDashboard() {
                       Create your first course to start teaching!
                     </p>
                     <Button
-                      onClick={() => setCurrentView("create")}
+                      onClick={handleCreateCourse}
                       className="bg-blue-600 hover:bg-blue-700"
                     >
                       Create First Course

@@ -12,6 +12,7 @@ export interface IUser extends Document {
     | "student"
     | "socialMediaManager"
     | "developer";
+  enrolledCourses?: mongoose.Types.ObjectId[];
   createdAt: Date;
   updatedAt: Date;
   comparePassword(candidatePassword: string): Promise<boolean>;
@@ -54,6 +55,12 @@ const UserSchema = new Schema<IUser>(
       ],
       default: "user",
     },
+    enrolledCourses: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: "Course",
+      },
+    ],
   },
   {
     timestamps: true,

@@ -97,6 +97,8 @@ const CourseSchema = new Schema<ICourse>(
 // Add index for better query performance
 CourseSchema.index({ title: 1 });
 CourseSchema.index({ instructor: 1 });
+CourseSchema.index({ students: 1 });
+CourseSchema.index({ createdAt: -1 });
 
 // Prevent model overwrite errors in Next.js
 const Course =

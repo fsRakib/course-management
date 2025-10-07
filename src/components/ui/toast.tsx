@@ -146,7 +146,7 @@ export function ToastProvider({ children }: { children: React.ReactNode }) {
   }, []);
 
   const toastContent = toasts.length > 0 && (
-    <div className="fixed top-4 right-4 z-50 space-y-2 max-w-sm w-full">
+    <div className="fixed bottom-4 right-4 z-50 space-y-2 max-w-sm w-full">
       {toasts.map((toast) => (
         <ToastItem key={toast.id} toast={toast} onClose={hideToast} />
       ))}

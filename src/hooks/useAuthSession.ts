@@ -28,7 +28,7 @@ export function useAuthSession() {
   };
 
   const redirectToUnauthorized = () => {
-    router.push("/unauthorized");
+    router.push("/");
   };
 
   const isAuthenticated = status === "authenticated" && !!session;

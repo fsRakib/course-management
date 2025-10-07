@@ -77,6 +77,10 @@ export default function DeveloperDashboard() {
     router.push("/developer/courses/new");
   };
 
+  const handleViewAllCourses = () => {
+    router.push("/developer/courses");
+  };
+
   if (status === "loading") {
     return (
       <div className="min-h-screen flex items-center justify-center">
@@ -258,7 +262,7 @@ export default function DeveloperDashboard() {
         <div className="bg-white rounded-lg shadow-sm p-6">
           <div className="flex items-center justify-between mb-6">
             <h2 className="text-xl font-bold text-gray-900">Recent Courses</h2>
-            <Button onClick={handleManageCourses} variant="outline" size="sm">
+            <Button onClick={handleViewAllCourses} variant="outline" size="sm">
               View All
             </Button>
           </div>

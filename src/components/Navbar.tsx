@@ -82,13 +82,7 @@ export default function Navbar() {
           {/* Desktop Navigation */}
           <div className="hidden md:flex md:items-center md:space-x-2">
             {/* Public Navigation Links */}
-            <Link
-              href="/"
-              className="relative px-4 py-2 text-sm font-medium text-gray-700 hover:text-indigo-600 transition-all duration-200 rounded-xl hover:bg-indigo-50 group"
-            >
-              <span className="relative z-10">Home</span>
-              <div className="absolute inset-0 bg-gradient-to-r from-indigo-500 to-purple-500 rounded-xl opacity-0 group-hover:opacity-10 transition-opacity duration-200"></div>
-            </Link>
+          
 
             {status === "loading" ? (
               <div className="flex items-center space-x-3 px-4 py-2">
